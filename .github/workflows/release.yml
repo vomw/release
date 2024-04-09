@@ -23,16 +23,10 @@ jobs:
           rust-version: stable
           targets: armv7-unknown-linux-gnueabihf
 
-      - name: Check Cargo availability
-        run: cargo --version          
 
 
-      - name: Check Rustup default toolchain
-        run: rustup default | grep stable
-
-
-      # - name: Install cross-compiling tools for ARM
-      #   run: sudo apt-get install -y gcc-arm-linux-gnueabihf
+      - name: Install cross-compiling tools for ARM
+        run: sudo apt-get install -y gcc-arm-linux-gnueabihf
 
       # - name: Install Rust
       #   uses: actions-rs/toolchain@v1
@@ -41,6 +35,15 @@ jobs:
 
       # - name: Install ARM target for Rust
       #   run: rustup target add armv7-unknown-linux-gnueabihf
+
+
+      - name: Check Cargo availability
+        run: cargo --version          
+
+
+      - name: Check Rustup default toolchain
+        run: rustup default | grep stable
+
 
       - name: Build for ARM
         run: |
