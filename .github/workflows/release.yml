@@ -7,27 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-20.04, windows-latest]
-        include:
-          - os: ubuntu-20.04
-            target: x86_64-unknown-linux-gnu
-            target_alias: linux-x86_64
-            bin_suffix: ''
-            archive_suffix: '.tar.bz2'
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            target_alias: win-x86_64-msvc
-            bin_suffix: '.exe'
-            archive_suffix: '.zip'
+    runs-on: ubuntu-20.04
     defaults:
       run:
         shell: bash
     env:
-      ARCHIVE_PATH: encrypted-dns_${{ github.ref_name }}_${{ matrix.target_alias }}${{ matrix.archive_suffix }}
-
+      ARCHIVE_PATH: encrypted-dns_${{ github.ref_name }}_linux-armv7.tar.bz2
     steps:
       - uses: actions/checkout@v4
 
@@ -36,49 +21,51 @@ jobs:
       - uses: hecrj/setup-rust-action@v2
         with:
           rust-version: stable
-          targets: ${{ matrix.target }}
+          targets: armv7-unknown-linux-gnueabihf
 
       - name: Check Cargo availability
-        run: cargo --version
+        run: cargo --version          
+
 
       - name: Check Rustup default toolchain
         run: rustup default | grep stable
 
-      - name: Build
+
+      # - name: Install cross-compiling tools for ARM
+      #   run: sudo apt-get install -y gcc-arm-linux-gnueabihf
+
+      # - name: Install Rust
+      #   uses: actions-rs/toolchain@v1
+      #   with:
+      #     toolchain: stable
+
+      # - name: Install ARM target for Rust
+      #   run: rustup target add armv7-unknown-linux-gnueabihf
+
+      - name: Build for ARM
         run: |
           echo 'lto = "fat"' >> Cargo.toml
-          env RUSTFLAGS="-C strip=symbols" cargo build --release
+          env RUSTFLAGS="-C strip=symbols" cargo build --target=armv7-unknown-linux-gnueabihf --release
           mkdir encrypted-dns
-          cp target/release/encrypted-dns${{ matrix.bin_suffix }} encrypted-dns/
+          cp target/release/encrypted-dns encrypted-dns/
           cp README.md example-encrypted-dns.toml encrypted-dns/
-          if [ "${{ matrix.os }}" = "ubuntu-20.04" ]; then
-            tar cjpf ${ARCHIVE_PATH} encrypted-dns
-          elif [ "${{ matrix.os }}" = "windows-latest" ]; then
-            "/C/Program Files/7-Zip/7z" a ${ARCHIVE_PATH} encrypted-dns
-          fi
+          tar cjpf ${ARCHIVE_PATH} encrypted-dns
 
-      - name: Install cargo-deb and build Debian package
-        if: ${{ matrix.os == 'ubuntu-20.04' }}
-        run: |
-          cargo install cargo-deb
-          cargo deb --output=encrypted-dns_${{ github.ref_name }}_amd64.deb --no-build
 
       - uses: actions/upload-artifact@v4
         with:
-          name: encrypted-dns_${{ matrix.target_alias }}
+          name: encrypted-dns_linux-armv7
           path: ${{ env.ARCHIVE_PATH }}
 
-      - uses: actions/upload-artifact@v4
-        if: ${{ matrix.os == 'ubuntu-20.04' }}
-        with:
-          name: encrypted-dns_deb-amd64
-          path: encrypted-dns_${{ github.ref_name }}_amd64.deb
 
   release:
     if: startsWith(github.ref, 'refs/tags/')
     needs:
       - build
     runs-on: ubuntu-20.04
+
+
+
 
     steps:
       - uses: actions/download-artifact@v4
@@ -92,6 +79,5 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            encrypted-dns_deb-amd64/*.deb
-            encrypted-dns_linux-x86_64/*.tar.bz2
-            encrypted-dns_win-x86_64-msvc/*.zip
+            encrypted-dns_linux-armv7/*.tar.bz2
+
