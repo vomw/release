@@ -212,7 +212,7 @@ dependencies = [
 
 [[package]]
 name = "encrypted-dns"
-version = "0.9.15"
+version = "0.9.15-20240411"
 dependencies = [
  "anyhow",
  "byteorder",
