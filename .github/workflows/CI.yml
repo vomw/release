@@ -3,10 +3,10 @@ name: Build and Release Masscan
 on:
   push:
     branches:
-      - main  
+      - main  # Change this if you use a different main branch name
   pull_request:
     branches:
-      - main  
+      - main  # Change this if you use a different main branch name
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up MinGW
+    - name: Install MinGW
       if: runner.os == 'Windows'
       run: |
         choco install mingw -y
@@ -31,6 +31,8 @@ jobs:
     - name: Compile Masscan
       if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
       run: |
+        sudo apt-get install -y mingw-w64
+        sudo apt-get install -y zip
         make CC=x86_64-w64-mingw32-gcc
 
     - name: Zip executable
