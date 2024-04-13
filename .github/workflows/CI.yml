@@ -22,8 +22,8 @@ jobs:
       - name: Build and Upload
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/arm/v7 -t myprogram .
-          docker cp $(docker ps -lq):/path/to/binary/masscan .
+          docker buildx build --platform linux/arm/v7 -t myprogram -f Dockerfile .
+          docker cp $(docker ps -lq):/app/masscan .
           mv masscan bin/masscan  # Adjust the path if necessary
           echo "Binary file compiled and moved successfully."
 
