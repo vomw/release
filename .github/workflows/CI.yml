@@ -23,9 +23,7 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx build --platform linux/arm/v7 -t myprogram -f Dockerfile .
-          docker run --name mycontainer myprogram  # Run the container to have access to its filesystem
-          docker cp mycontainer:/app/bin/masscan bin/masscan  # Copy the binary from the container
-          docker rm mycontainer  # Remove the temporary container
+          docker run --rm --name mycontainer myprogram sh -c 'cp /app/bin/masscan /github/workspace/bin/masscan'
           echo "Binary file compiled and copied successfully."
 
       - name: Upload Binaries
