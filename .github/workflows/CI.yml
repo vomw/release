@@ -19,19 +19,16 @@ jobs:
     - name: Install MinGW
       run: |
         choco install mingw -y
-
+       
 
     - name: Compile Masscan
       run: make CC=x86_64-w64-mingw32-gcc
 
-    - name: Zip executable
-      run: zip masscan.zip bin/masscan.exe
-
-    - name: Upload artifact
+    - name: Upload binary
       uses: actions/upload-artifact@v2
       with:
         name: masscan
-        path: masscan.zip
+        path: bin/masscan.exe
 
   release:
     needs: build
@@ -39,11 +36,11 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-    - name: Download artifact
+    - name: Download binary
       uses: actions/download-artifact@v2
       with:
         name: masscan
-        path: masscan.zip
+        path: bin/masscan.exe
 
     - name: Create release
       id: create_release
@@ -51,7 +48,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v1.3.2  # Replace with your desired tag name
+        tag_name: v1.3.2 # Replace with your desired tag name
         release_name: Release 1.3.2  # Replace with your desired release name
         body: |
           Release of Masscan v1.3.2
@@ -64,6 +61,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: masscan.zip
-        asset_name: masscan.zip
-        asset_content_type: application/zip
+        asset_path: bin/masscan.exe
+        asset_name: masscan.exe
+        asset_content_type: application/octet-stream
