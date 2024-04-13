@@ -21,9 +21,12 @@ jobs:
       - name: Cross-compile program
         run: |
           export CC=arm-linux-gnueabihf-gcc
+          make clean  # Ensure clean build
           make
           mkdir -p bin
-          cp bin/masscan ./bin/masscan
+          if [ ! -f bin/masscan ]; then
+            cp masscan bin/masscan
+          fi
 
       - name: Upload Binaries
         uses: actions/upload-artifact@v2
