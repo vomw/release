@@ -10,42 +10,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Install MinGW
-      if: runner.os == 'Windows'
       run: |
         choco install mingw -y
         echo "::add-path::C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin"
 
-    - name: Install dependencies
-      if: runner.os != 'Windows'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential
-        sudo apt-get install -y mingw-w64
-        sudo apt-get install -y zip
-
-    - name: Download Windows SDK headers
-      if: runner.os == 'Windows'
-      run: |
-        curl -L -o w32api.zip https://github.com/vomw/sanctioned/raw/main/w32api.zip
-        unzip -o w32api.zip -d /usr/x86_64-w64-mingw32/sys-root/mingw/include/
-
     - name: Compile Masscan
-      if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
       run: make CC=x86_64-w64-mingw32-gcc
 
     - name: Zip executable
-      if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
       run: zip masscan.zip bin/masscan.exe
 
     - name: Upload artifact
-      if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
       uses: actions/upload-artifact@v2
       with:
         name: masscan
