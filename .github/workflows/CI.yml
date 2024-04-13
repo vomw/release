@@ -13,18 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build and Upload
+      - name: Install build dependencies
         run: |
-          docker buildx create --use
-          docker buildx build --platform linux/arm/v7 -t myprogram -f Dockerfile .
-          docker run --rm --name mycontainer myprogram sh -c 'cp /app/bin/masscan /github/workspace/bin/masscan'
-          echo "Binary file compiled and copied successfully."
+          sudo apt-get update
+          sudo apt-get install -y build-essential git gcc-arm-linux-gnueabihf
+
+      - name: Cross-compile program
+        run: |
+          export CC=arm-linux-gnueabihf-gcc
+          make
+          mkdir -p bin
+          cp bin/masscan ./bin/masscan
 
       - name: Upload Binaries
         uses: actions/upload-artifact@v2
