@@ -22,7 +22,7 @@ jobs:
         run: |
           export CC=arm-linux-gnueabihf-gcc
           make clean  # Ensure clean build
-          make
+          make STATIC=1
           mkdir -p bin
           if [ ! -f bin/masscan ]; then
             cp masscan bin/masscan
