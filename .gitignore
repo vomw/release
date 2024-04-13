@@ -1,7 +1,0 @@
-**/*.rs.bk
-*~
-/target/
-encrypted-dns.state
-encrypted-dns.toml
-a.rb
-sizes.txt
