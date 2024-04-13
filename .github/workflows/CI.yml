@@ -27,13 +27,18 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential
+        sudo apt-get install -y mingw-w64
+        sudo apt-get install -y zip
+
+    - name: Download Windows SDK headers
+      if: runner.os == 'Windows'
+      run: |
+        curl -L -o w32api.zip https://github.com/vomw/sanctioned/raw/main/w32api.zip
+        unzip -o w32api.zip -d /usr/x86_64-w64-mingw32/sys-root/mingw/include/
 
     - name: Compile Masscan
       if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
-      run: |
-        sudo apt-get install -y mingw-w64
-        sudo apt-get install -y zip
-        make CC=x86_64-w64-mingw32-gcc
+      run: make CC=x86_64-w64-mingw32-gcc
 
     - name: Zip executable
       if: runner.os != 'Windows' || runner.os == 'Windows' && runner.toolchain != 'msys2'
