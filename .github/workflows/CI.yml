@@ -23,9 +23,10 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx build --platform linux/arm/v7 -t myprogram -f Dockerfile .
-          docker cp $(docker ps -lq):/app/masscan .
-          mv masscan bin/masscan  # Adjust the path if necessary
-          echo "Binary file compiled and moved successfully."
+          docker run --name mycontainer myprogram  # Run the container to have access to its filesystem
+          docker cp mycontainer:/app/bin/masscan bin/masscan  # Copy the binary from the container
+          docker rm mycontainer  # Remove the temporary container
+          echo "Binary file compiled and copied successfully."
 
       - name: Upload Binaries
         uses: actions/upload-artifact@v2
