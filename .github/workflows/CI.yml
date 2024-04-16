@@ -13,16 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build Docker image
-        run: docker buildx build --platform linux/arm/v7 -t myprogram -f Dockerfile .
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git
 
       - name: Cross-compile program
         run: |
-          docker run --rm -v $(pwd):/workspace myprogram make clean
-          docker run --rm -v $(pwd):/workspace myprogram make
+          git clone --depth 1 https://github.com/raspberrypi/tools.git /tmp/tools
+          export PATH=$PATH:/tmp/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+          make clean
+          make CC=arm-linux-gnueabihf-gcc
 
       - name: Upload Binaries
         uses: actions/upload-artifact@v2
