@@ -17,6 +17,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential git
+          sudo ldd --version
+          sudo apt install libc6
+          sudo ldd --version
 
       - name: Cross-compile program
         run: |
