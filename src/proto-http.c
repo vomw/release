@@ -386,9 +386,9 @@ http_change_field(unsigned char **inout_header, size_t header_length,
 static const char
 http_hello[] =      "GET / HTTP/1.0\r\n"
 #ifdef IVRE_BUILD
-                    "User-Agent: ivre-masscan/1.3 https://ivre.rocks/\r\n"
+                    "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 wxwork/3.0.37 MicroMessenger/7.0.1 Language/zh\r\n"
 #else
-                    "User-Agent: ivre-masscan/1.3 https://github.com/robertdavidgraham/\r\n"
+                    "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.48(0x18003029) NetType/4G Language/zh_CN\r\n"
 #endif
                     "Accept: */*\r\n"
                     //"Connection: Keep-Alive\r\n"

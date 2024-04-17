@@ -251,7 +251,7 @@ struct PayloadUDP_Default hard_coded_udp_payloads[] = {
         "MAN: \"ssdp:discover\"\r\n"
         "MX: 1\r\n"
         "ST: ssdp:all\r\n"
-        "USER-AGENT: unix/1.0 UPnP/1.1 masscan/1.x\r\n"},
+        "USER-AGENT: Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.46(0x18002e29) NetType/WIFI Language/zh_HK\r\n"},
 
     /* NFS - kludge: use the DNS cookie, setting first 2 bytes instead of 4 */
     {2049, 65536, 40, 0, dns_set_cookie,
