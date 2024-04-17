@@ -28,8 +28,7 @@ handle_segfault(int sig)
 	int size;
 
     printf("======================================================================\n");
-    printf(" Segmentation fault: please post this backtrace to:\n");
-    printf(" https://github.com/robertdavidgraham/masscan/issues\n");
+    printf(" Segmentation fault: please post this backtrace to official repo.\n");
     printf("======================================================================\n");
 	size = backtrace(func, BACKTRACE_SIZE);
 	symb = backtrace_symbols(func, size);
@@ -175,8 +174,7 @@ handle_segfault(int sig)
 
     UNUSEDPARM(sig);
     printf("======================================================================");
-    printf(" Segmentation fault: please post this backtrace to:\n");
-    printf(" https://github.com/robertdavidgraham/masscan/issues\n");
+    printf(" Segmentation fault: please post this backtrace to official repo.\n");
     printf("======================================================================");
     exit(1);
 }

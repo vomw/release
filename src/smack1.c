@@ -554,10 +554,7 @@ id_already_exists(const size_t *ids, unsigned count, size_t new_id)
     return 0;
 }
 
-/****************************************************************************
- * When combining two match lists (when two patterns overlap, like the
- * pattern "BERT" and "ROBERT"), we need to merge the two lists of matches.
- ****************************************************************************/
+
 static void
 smack_copy_matches(
     struct SmackMatches *row,

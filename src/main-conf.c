@@ -96,7 +96,7 @@ print_version()
     printf("\n");
     printf("Masscan version %s ( %s )\n", 
         MASSCAN_VERSION,
-        "https://github.com/robertdavidgraham/masscan"
+        "github-action"
         );
     printf("Compiled on: %s %s\n", __DATE__, __TIME__);
 
@@ -181,7 +181,7 @@ print_version()
 static void
 print_nmap_help(void)
 {
-    printf("Masscan (https://github.com/robertdavidgraham/masscan)\n"
+    printf("Masscan\n"
 "Usage: masscan [Options] -p{Target-Ports} {Target-IP-Ranges}\n"
 "TARGET SPECIFICATION:\n"
 "  Can pass only IPv4/IPv6 address, CIDR networks, or ranges (non-nmap style)\n"
@@ -233,7 +233,7 @@ print_nmap_help(void)
 "  masscan -v -sS 192.168.0.0/16 10.0.0.0/8 -p 80\n"
 "  masscan 23.0.0.0/0 -p80 --banners -output-format binary --output-filename internet.scan\n"
 "  masscan --open --banners --readscan internet.scan -oG internet_scan.grepable\n"
-"SEE (https://github.com/robertdavidgraham/masscan) FOR MORE HELP\n"
+"SEE official repo FOR MORE HELP\n"
 "\n");
 }
 
