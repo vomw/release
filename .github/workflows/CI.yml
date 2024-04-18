@@ -1,32 +1,66 @@
-name: Build and Upload Binary (Windows)
+name: Build and Upload Telex-Client
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Change this to the branch you want to trigger the workflow on
 
 jobs:
   build:
     runs-on: windows-latest
-
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Install Dependencies
-        run: |
-          choco install mingw -y
-          pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-python2 mingw-w64-x86_64-python3
-
-      - name: Build Program
-        run: |
-          make
-
-      - name: Upload Binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: telex-client
-          path: telex-client.exe  
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up MinGW and MSYS
+      uses: jwilhelm/mingw-action@master
+      
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Extract Tarballs
+      run: |
+        mkdir $HOME/telex
+        mkdir $HOME/telex/local
+        export LDFLAGS="-L$HOME/telex/local/lib"
+        export CFLAGS="-I$HOME/telex/local/include"
+        tar xf $HOME/telex-client.tar.gz
+        tar xf $HOME/openssl-1.0.0d.tar.gz
+        tar xf $HOME/libevent-2.0.12-stable.tar.gz
+        tar xf $HOME/argtable2-13.tar.gz
+        
+    - name: Build OpenSSL
+      run: |
+        cd $HOME/telex/openssl-1.0.0d
+        patch -p1 < ../telex-client/openssl-1.0.0d-telex.patch
+        ./config no-shared no-hw no-asm --prefix=$HOME/telex/local/ --openssldir=$HOME/telex/local/
+        make
+        make install
+        
+    - name: Build Libevent
+      run: |
+        cd $HOME/telex/libevent-2.0.12-stable
+        ./configure --prefix=$HOME/telex/local --disable-shared
+        make
+        make install
+        
+    - name: Build Argtable2
+      run: |
+        cd $HOME/telex/argtable2-13
+        ./configure --prefix=$HOME/telex/local
+        make
+        make install
+        
+    - name: Build telex-client
+      run: |
+        cd $HOME/telex/telex-client
+        CC=gcc make -f Makefile.w32
+        
+    - name: Upload Binary
+      uses: actions/upload-artifact@v2
+      with:
+        name: telex-client
+        path: $HOME/telex/telex-client/telex-client.exe
