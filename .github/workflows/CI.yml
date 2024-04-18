@@ -16,11 +16,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install MSYS2
-        uses: actions/setup-msys2@v1
-
       - name: Install Dependencies
         run: |
+          choco install mingw -y
           pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-python2 mingw-w64-x86_64-python3
 
       - name: Build Program
