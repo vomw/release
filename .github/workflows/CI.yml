@@ -35,7 +35,7 @@ jobs:
         patch -p1 < ../telex-client/openssl-1.0.0d-telex.patch
         ./config no-shared no-hw no-asm --prefix=$HOME/telex/local/ --openssldir=$HOME/telex/local/
         make
-        make install
+        make install_sw
         cd $HOME/telex
         tar xf ../libevent-2.0.12-stable.tar.gz 
         cd libevent-2.0.12-stable
