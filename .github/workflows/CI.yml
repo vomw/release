@@ -13,8 +13,8 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       
-    - name: Set up MinGW and MSYS
-      uses: jwilhelm/mingw-action@master
+    - name: Set MSYS
+      uses: msys2/setup-msys2@v2
       
     - name: Install Python
       uses: actions/setup-python@v2
