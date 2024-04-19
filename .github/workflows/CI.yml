@@ -16,11 +16,11 @@ jobs:
     - name: Install necessary tools
       run: |
         python -V
+        which python
         sudo apt-get update
         sudo apt-get install -y python2
-        which python2  
-        which python
-        python -V
+        which python2 
+        sudo rm /usr/bin/python
         ln -s /usr/bin/python2 /usr/bin/python
         python -V
         sudo apt-get install -y mingw-w64
