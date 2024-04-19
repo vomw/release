@@ -20,6 +20,11 @@ jobs:
 
     - name: Set up environment and build telex-client
       run: |
+        python -V
+        which python
+        which python2
+        alias python=python2
+        python -V
         git clone https://github.com/ewust/telex telex-git-clone
         mv telex-git-clone $HOME/telex
         curl "https://www.openssl.org/source/openssl-1.0.0d.tar.gz" -o $HOME/openssl-1.0.0d.tar.gz
