@@ -23,7 +23,8 @@ jobs:
         sudo rm /usr/bin/python
         sudo ln -s /usr/bin/python2 /usr/bin/python
         python -V
-        sudo apt-get install -y mingw-w64
+        sudo apt-get install -y mingw-w64 
+        # mingw64-x86_64-gcc-core
 
     - name: Set up environment and build telex-client
       run: |
@@ -58,7 +59,7 @@ jobs:
         make
         make install
         cd $HOME/telex/telex-client
-        CC=gcc make -f Makefile.w32
+        CC=gcc make -f Makefile
 
     - name: Upload Binary
       uses: actions/upload-artifact@v2
