@@ -22,7 +22,7 @@ jobs:
       run: |
         python -V
         which python
-        apt install python-is-python2
+        sudo apt-get install python-is-python2
         # alias python=python2
         python -V
         which python
