@@ -63,9 +63,13 @@ jobs:
         make install
         cd $HOME/telex/telex-client
         CC=gcc make -f Makefile.w32
+        ls *.exe
+        cd $HOME/telex
+        git status
+
 
     - name: Upload Binary
       uses: actions/upload-artifact@v2
       with:
         name: telex-client
-        path: $HOME/telex/telex-client/telex-client.exe
+        path: $HOME/telex/telex-client/telex-client
