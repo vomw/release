@@ -11,7 +11,8 @@ LDFLAGS=$(LIB) -lssl -lcrypto -levent_core -levent_extra -levent_openssl -largta
 
 # for Windows:
 CFLAGS += -static
-LDFLAGS += -lws2_32 -lgdi32 -levent 
+# LDFLAGS += -lws2_32 -lgdi32 -levent 
+LDFLAGS += -lgdi32 -levent 
 
 OBJS=listener.o logger.o proxy.o ssl.o util.o client.o tag/tag.o tag/ptwist168.o
 TARGETS=telex-client

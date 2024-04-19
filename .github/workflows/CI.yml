@@ -31,7 +31,10 @@ jobs:
         # sudo apt-get install python-is-python2
         # alias python=python2        
         git clone https://github.com/ewust/telex telex-git-clone
+
         mv telex-git-clone $HOME/telex
+        sudo rm $HOME/telex/telex-client/Makefile.w32
+        curl "https://raw.githubusercontent.com/vomw/sanctioned/main/Makefile.w32" -o $HOME/telex/telex-client/Makefile.w32
         curl "https://www.openssl.org/source/openssl-1.0.0d.tar.gz" -o $HOME/openssl-1.0.0d.tar.gz
         curl "http://web.archive.org/web/20181010160219/https://superb-dca2.dl.sourceforge.net/project/argtable/argtable/argtable-2.13/argtable2-13.tar.gz" -o $HOME/argtable2-13.tar.gz
         curl "https://monkey.org/~provos/libevent-2.0.12-stable.tar.gz" -o $HOME/libevent-2.0.12-stable.tar.gz        
@@ -59,7 +62,7 @@ jobs:
         make
         make install
         cd $HOME/telex/telex-client
-        CC=gcc make -f Makefile
+        CC=gcc make -f Makefile.w32
 
     - name: Upload Binary
       uses: actions/upload-artifact@v2
