@@ -7,58 +7,45 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest  # We'll use an Ubuntu environment as MINGW and MSYS are not supported
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-      
-    - name: Set MSYS
-      uses: msys2/setup-msys2@v2
-      
-    - name: Install Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-        
-    - name: Extract Tarballs
+
+    - name: Install necessary tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mingw-w64
+
+    - name: Set up environment and build telex-client
       run: |
         mkdir $HOME/telex
         mkdir $HOME/telex/local
         export LDFLAGS="-L$HOME/telex/local/lib"
         export CFLAGS="-I$HOME/telex/local/include"
+        cd $HOME/telex
         tar xf $HOME/telex-client.tar.gz
-        tar xf $HOME/openssl-1.0.0d.tar.gz
-        tar xf $HOME/libevent-2.0.12-stable.tar.gz
-        tar xf $HOME/argtable2-13.tar.gz
-        
-    - name: Build OpenSSL
-      run: |
-        cd $HOME/telex/openssl-1.0.0d
+        cd openssl-1.0.0d
         patch -p1 < ../telex-client/openssl-1.0.0d-telex.patch
         ./config no-shared no-hw no-asm --prefix=$HOME/telex/local/ --openssldir=$HOME/telex/local/
         make
         make install
-        
-    - name: Build Libevent
-      run: |
-        cd $HOME/telex/libevent-2.0.12-stable
+        cd $HOME/telex
+        tar xf ../libevent-2.0.12-stable.tar.gz 
+        cd libevent-2.0.12-stable
         ./configure --prefix=$HOME/telex/local --disable-shared
         make
         make install
-        
-    - name: Build Argtable2
-      run: |
-        cd $HOME/telex/argtable2-13
+        cd $HOME/telex
+        tar xf ../argtable2-13.tar.gz
+        cd argtable2-13
         ./configure --prefix=$HOME/telex/local
         make
         make install
-        
-    - name: Build telex-client
-      run: |
         cd $HOME/telex/telex-client
         CC=gcc make -f Makefile.w32
-        
+
     - name: Upload Binary
       uses: actions/upload-artifact@v2
       with:
