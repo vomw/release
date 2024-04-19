@@ -65,10 +65,11 @@ jobs:
         CC=gcc make -f Makefile.w32
         cd $HOME/telex
         git status
+        sudo mv $HOME/telex/telex-client/telex-client /tmp
 
 
     - name: Upload Binary
       uses: actions/upload-artifact@v2
       with:
         name: telex-client
-        path: $HOME/telex/telex-client/telex-client
+        path: /tmp/telex-client
