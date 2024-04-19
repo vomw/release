@@ -3,11 +3,11 @@ name: Build and Upload Telex-Client
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow on
+      - main  
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
     - name: Checkout Repository
