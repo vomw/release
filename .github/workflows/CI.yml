@@ -20,12 +20,17 @@ jobs:
 
     - name: Set up environment and build telex-client
       run: |
-        mkdir $HOME/telex
+        git clone https://github.com/ewust/telex telex-git-clone
+        mv telex-git-clone $HOME/telex
+        curl "https://www.openssl.org/source/openssl-1.0.0d.tar.gz" -o $HOME/openssl-1.0.0d.tar.gz
+        curl "http://web.archive.org/web/20181010160219/https://superb-dca2.dl.sourceforge.net/project/argtable/argtable/argtable-2.13/argtable2-13.tar.gz" -o $HOME/argtable2-13.tar.gz
+        curl "https://monkey.org/~provos/libevent-2.0.12-stable.tar.gz" -o $HOME/libevent-2.0.12-stable.tar.gz        
+        # mkdir $HOME/telex
         mkdir $HOME/telex/local
         export LDFLAGS="-L$HOME/telex/local/lib"
         export CFLAGS="-I$HOME/telex/local/include"
         cd $HOME/telex
-        tar xf $HOME/telex-client.tar.gz
+        tar xf ../openssl-1.0.0d.tar.gz
         cd openssl-1.0.0d
         patch -p1 < ../telex-client/openssl-1.0.0d-telex.patch
         ./config no-shared no-hw no-asm --prefix=$HOME/telex/local/ --openssldir=$HOME/telex/local/
