@@ -15,12 +15,14 @@ jobs:
 
     - name: Install necessary tools
       run: |
-        which python
-        which python2.7
-        python -V
-        ln -s /usr/bin/python2.7 /usr/bin/python
         python -V
         sudo apt-get update
+        sudo apt-get install -y python2
+        which python2  
+        which python
+        python -V
+        ln -s /usr/bin/python2 /usr/bin/python
+        python -V
         sudo apt-get install -y mingw-w64
 
     - name: Set up environment and build telex-client
