@@ -63,7 +63,6 @@ jobs:
         make install
         cd $HOME/telex/telex-client
         CC=gcc make -f Makefile.w32
-        ls *.exe
         cd $HOME/telex
         git status
 
