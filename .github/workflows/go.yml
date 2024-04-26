@@ -26,9 +26,9 @@ jobs:
         mkdir /tmp/go
         # export GOPATH=/tmp/go
         go mod download
-        env GOOS=windows GOARCH=amd64 go build -work -trimpath -o /tmp/go/ dnsstamps.go
+        env GOOS=windows GOARCH=amd64 go build -work -trimpath dnsstamps
         go env GOPATH
-        ls -alht /tmp/go
+        ls -alht 
         git status
 
     # - name: Test
