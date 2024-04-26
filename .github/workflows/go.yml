@@ -19,13 +19,13 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.20'
+        go-version: '1.18'
 
     - name: Build
       run: |
         env GOOS=windows GOARCH=amd64 go build -v ./...
         git status
-        ls -lRht
+        ls -lRht ./...
       
 
     # - name: Test
