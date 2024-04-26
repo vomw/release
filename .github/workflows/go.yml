@@ -24,8 +24,8 @@ jobs:
     - name: Build
       run: |
         env GOOS=windows GOARCH=amd64 go build -v ./...
-        git status
-        ls -alRht 
+        go env GOPATH
+        ls -alRht $(go env GOPATH)
       
 
     # - name: Test
