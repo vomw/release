@@ -27,7 +27,7 @@ jobs:
         export GOPATH=/tmp/go
         env GOOS=windows GOARCH=amd64 go build -v -work ./...
         go env GOPATH
-        ls -alRht /tmp/
+        ls -alht /tmp/go
         git status
 
     # - name: Test
