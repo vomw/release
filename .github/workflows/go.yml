@@ -23,9 +23,9 @@ jobs:
 
     - name: Build
       run: |
-        env GOOS=windows GOARCH=amd64 go build -v /tmp
+        env GOOS=windows GOARCH=amd64 go build -v 
         git status
-        ls -lRht /tmp
+        ls -lRht 
       
 
     # - name: Test
