@@ -24,8 +24,9 @@ jobs:
     - name: Build
       run: |
         mkdir /tmp/go
-        export GOPATH=/tmp/go
-        env GOOS=windows GOARCH=amd64 go build -v -work ./...
+        # export GOPATH=/tmp/go
+        go mod download
+        env GOOS=windows GOARCH=amd64 go build -work -trimpath ./... -o mkdir /tmp/go/binary 
         go env GOPATH
         ls -alht /tmp/go
         git status
