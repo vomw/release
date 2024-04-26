@@ -23,9 +23,11 @@ jobs:
 
     - name: Build
       run: |
+        mkdir /tmp/go
+        export GOPATH=/tmp/go
         env GOOS=windows GOARCH=amd64 go build -v -work ./...
         go env GOPATH
-        ls -alht 
+        ls -alRht /tmp/
         git status
 
     # - name: Test
