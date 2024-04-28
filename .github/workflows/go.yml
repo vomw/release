@@ -30,7 +30,7 @@ jobs:
         # unset GOBIN
         go mod download
         where env
-        env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o binary.exe github.com/jedisct1/go-dnsstamps 
+        env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o binary.exe github.com/jedisct1/go-dnsstamps 
         git status
         # sudo chmod a=rwx *.exe
         # ls -alht *.exe
