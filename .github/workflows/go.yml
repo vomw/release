@@ -26,6 +26,8 @@ jobs:
         # mkdir /tmp/go
         # export GOPATH=/tmp/go
         # go env GOPATH
+        go env GOBIN
+        unset GOBIN
         go mod download
         GOOS=windows GOARCH=amd64 go build github.com/jedisct1/go-dnsstamps
         git status
