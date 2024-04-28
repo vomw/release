@@ -29,7 +29,7 @@ jobs:
         go env GOBIN
         unset GOBIN
         go mod download
-        GOOS=windows GOARCH=amd64 go build github.com/jedisct1/go-dnsstamps
+        GOOS=windows GOARCH=amd64 go build github.com/jedisct1/go-dnsstamps -o binary.exe
         git status
         sudo chmod a=rwx *.exe
         ls -alht *.exe
@@ -41,4 +41,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: binary
-        path: dnsstamps_test.exe, dnsstamps.exe
+        path: binary.exe
