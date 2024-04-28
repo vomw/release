@@ -27,10 +27,10 @@ jobs:
         # export GOPATH=/tmp/go
         # go env GOPATH
         go mod download
-        env CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o binary 
+        env GOOS=windows GOARCH=amd64 go build -o binary.exe 
         git status
-        ls -alht binary
-        sudo chmod a=rwx binary
+        sudo chmod a=rwx binary.exe
+        ls -alht binary.exe
 
     # - name: Test
     #   run: go test -v ./...
@@ -39,4 +39,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: binary
-        path: binary
+        path: binary.exe
