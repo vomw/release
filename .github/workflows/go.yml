@@ -35,7 +35,7 @@ jobs:
     # - name: Test
     #   run: go test -v ./...
 
-- name: Upload Binary
+    - name: Upload Binary
       uses: actions/upload-artifact@v2
       with:
         name: binary
