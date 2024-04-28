@@ -25,14 +25,14 @@ jobs:
       run: |
         # mkdir /tmp/go
         # export GOPATH=/tmp/go
-        # go env GOPATH
+        go env GOPATH
         go env GOBIN
-        unset GOBIN
+        # unset GOBIN
         go mod download
         GOOS=windows GOARCH=amd64 go build -o binary.exe github.com/jedisct1/go-dnsstamps
         git status
-        sudo chmod a=rwx *.exe
-        ls -alht *.exe
+        # sudo chmod a=rwx *.exe
+        # ls -alht *.exe
 
     # - name: Test
     #   run: go test -v ./...
