@@ -12,7 +12,7 @@ on:
 jobs:
 
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
@@ -25,16 +25,15 @@ jobs:
       run: |
         # mkdir /tmp/go
         # export GOPATH=/tmp/go
-        go env 
+        sudo go env 
         # unset GOBIN
-        set GOOS=windows
-        set GOARCH=amd64
-        go env 
-        go mod download
-        # env GOOS=windows GOARCH=amd64 
-        go build -o binary.exe .
+        # set GOOS=windows
+        # set GOARCH=amd64
+        # go env 
+        sudo go mod download
+        sudo env GOOS=windows GOARCH=amd64 go build -o binary.exe .
         git status
-        # sudo chmod a=rwx *.exe
+        sudo chmod a=rwx *.exe
         # ls -alht *.exe
 
     # - name: Test
