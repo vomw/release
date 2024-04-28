@@ -27,7 +27,6 @@ jobs:
         # export GOPATH=/tmp/go
         go env 
         # unset GOBIN
-        echo.
         set GOOS=windows
         set GOARCH=amd64
         go env 
