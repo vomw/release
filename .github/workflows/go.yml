@@ -27,8 +27,7 @@ jobs:
         # export GOPATH=/tmp/go
         # go env GOPATH
         go mod download
-        env GOOS=windows GOARCH=amd64 go build -o dnsstamps_test.exe ./dnsstamps_test.go
-        env GOOS=windows GOARCH=amd64 go build -o dnsstamps.exe ./dnsstamps.go
+        GOOS=windows GOARCH=amd64 go build github.com/jedisct1/go-dnsstamps
         git status
         sudo chmod a=rwx *.exe
         ls -alht *.exe
