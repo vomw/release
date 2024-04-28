@@ -30,8 +30,8 @@ jobs:
         env GOOS=windows GOARCH=amd64 go build -o dnsstamps_test.exe dnsstamps_test.go
         env GOOS=windows GOARCH=amd64 go build -o dnsstamps.exe dnsstamps.go
         git status
-        sudo chmod a=rwx binary.exe
-        ls -alht binary.exe
+        sudo chmod a=rwx *.exe
+        ls -alht *.exe
 
     # - name: Test
     #   run: go test -v ./...
@@ -39,7 +39,5 @@ jobs:
     - name: upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: dnsstamps_test
-        path: dnsstamps_test.exe
-        name: dnsstamps
-        path: dnsstamps.exe
+        name: binary
+        path: dnsstamps_test.exe, dnsstamps.exe
