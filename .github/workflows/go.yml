@@ -39,7 +39,7 @@ jobs:
     - name: upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: artifact
+        name: dnsstamps_test
         path: dnsstamps_test.exe
-        name: artifact
+        name: dnsstamps
         path: dnsstamps.exe
