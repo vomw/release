@@ -23,13 +23,20 @@ jobs:
 
     - name: Build
       run: |
-        mkdir /tmp/go
+        # mkdir /tmp/go
         # export GOPATH=/tmp/go
+        # go env GOPATH
         go mod download
         CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o binary
-        go env GOPATH
-        ls -alht 
         git status
+        ls -alht binary
+        sudo chmod a=rwx binary
 
     # - name: Test
     #   run: go test -v ./...
+
+- name: Upload Binary
+      uses: actions/upload-artifact@v2
+      with:
+        name: binary
+        path: binary
