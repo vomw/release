@@ -27,7 +27,7 @@ jobs:
         # export GOPATH=/tmp/go
         # go env GOPATH
         go mod download
-        CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o binary
+        env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o binary 
         git status
         ls -alht binary
         sudo chmod a=rwx binary
