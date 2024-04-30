@@ -31,7 +31,7 @@ jobs:
         # set GOARCH=amd64
         # go env 
         sudo go mod download
-        sudo env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o binary.exe 
+        sudo env GOOS=windows GOARCH=amd64 go build -o binary.exe dnsstamps.go
         git status
         sudo chmod a=rwx *.exe
         # ls -alht *.exe
