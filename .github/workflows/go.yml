@@ -40,7 +40,7 @@ jobs:
         sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
         git status
         sudo chmod a=rwx *.exe
-        # ls -alht *.exe
+        sudo ls -alht *.exe
 
     # - name: Test
     #   run: go test -v ./...
