@@ -45,8 +45,8 @@ jobs:
         sudo go get .
         sudo go mod download
         # sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
-        # sudo go build -v -o dnsstamps.exe -trimpath -ldflags "-s -w -buildid=" ./dnsstamps.go
-        sudo go build -v ./...
+        sudo go build -v -o dnsstamps.exe -trimpath -ldflags "-s -w -buildid=" ./main.go
+        # sudo go build -v ./...
         # sudo go test
         git status
         sudo chmod a=rwx *.exe
