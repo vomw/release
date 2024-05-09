@@ -1,5 +1,4 @@
-# go-dnsstamps
+DNS Stamps crate for Rust
+=========================
 
-DNS Stamps library for Go.
-
-## [Documentation](https://pkg.go.dev/github.com/jedisct1/go-dnsstamps)
+(WIP)
