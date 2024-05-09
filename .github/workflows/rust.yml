@@ -53,11 +53,11 @@ jobs:
       - name: Check files
         run: |
           git status
-          ls -alht 
+          ls -alht target
 
         
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: dnsstamps
-          path: dnsstamps*
+          path: target/dnsstamps*
