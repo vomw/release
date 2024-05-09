@@ -13,6 +13,12 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      GOOS: windows
+      GOARCH: amd64
+      # GOARM: ${{ matrix.goarm }}
+      CGO_ENABLED: 0
+
     steps:
     - uses: actions/checkout@v4
 
@@ -39,8 +45,8 @@ jobs:
         sudo go get .
         # sudo go mod download
         # sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
-        sudo env GOOS=windows GOARCH=amd64 go build -v ./...
-        go test
+        sudo go build -v -o dnsstamps.exe -trimpath -ldflags "-s -w -buildid=" ./dnsstamps.go
+        sudo go test
         git status
         sudo chmod a=rwx *.exe
         sudo ls -alht *.exe
