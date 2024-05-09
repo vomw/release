@@ -17,13 +17,13 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Go
-      # uses: actions/setup-go@v4
-      # with:
-      #   go-version: '1.22'
-      run: |
-        sudo add-apt-repository ppa:longsleep/golang-backports
-        sudo apt update
-        sudo apt install golang-go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21.x'
+      # run: |
+      #   sudo add-apt-repository ppa:longsleep/golang-backports
+      #   sudo apt update
+      #   sudo apt install golang-go
 
 
     - name: Build
@@ -36,8 +36,11 @@ jobs:
         # set GOOS=windows
         # set GOARCH=amd64
         # go env 
-        sudo go mod download
-        sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
+        sudo go get .
+        # sudo go mod download
+        # sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
+        sudo env GOOS=windows GOARCH=amd64 go build -v ./...
+        go test
         git status
         sudo chmod a=rwx *.exe
         sudo ls -alht *.exe
@@ -48,5 +51,5 @@ jobs:
     - name: upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: test
-        path: test.exe
+        name: dnsstamps
+        path: dnsstamps.exe
