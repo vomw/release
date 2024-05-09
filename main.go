@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/vomw/sanctioned"
+	"github.com/jedisct1/go-dnsstamps"
 )
 
 func main() {
