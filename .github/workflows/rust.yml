@@ -49,6 +49,13 @@ jobs:
           use-cross: true
           command: build
           args: --release --target ${{ matrix.target }}
+
+      - name: Check files
+        run: |
+          git status
+          ls -alht 
+
+        
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
