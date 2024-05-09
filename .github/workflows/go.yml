@@ -50,6 +50,7 @@ jobs:
         git status
         sudo chmod a=rwx *.exe
         sudo ls -alht *.exe
+        file dnsstamps.exe
 
     # - name: Test
     #   run: go test -v ./...
