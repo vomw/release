@@ -7,8 +7,8 @@ module.exports = {
   target: 'static',
 
   sitemap: {
-    hostname: "https://dnscrypt.info",
-    gzip: true
+    hostname: ".",
+    gzip: false
   },
 
   css: [{
