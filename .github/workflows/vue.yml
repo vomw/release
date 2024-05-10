@@ -16,15 +16,27 @@ jobs:
       - name: environment
         uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 20
 
-      - name: npm
+      - name: npm install
         run: |
           npm install
           # npm run serve
+
+      - name: npm run build
+        run: |
           npm run build
+
+      - name: npm run test
+        run: |
           npm run test
+
+      - name: npm run lint
+        run: |
           npm run lint
+
+      - name: check files
+        run: |
           git status
           ls -alht
 
