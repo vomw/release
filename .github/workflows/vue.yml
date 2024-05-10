@@ -20,10 +20,12 @@ jobs:
 
       - name: npm install
         run: |
-          npm --help
+          npm help 
+          npm help npm
           # npm install
           # npm run serve
           # CI=false npm install
+          npm ci
 
       - name: npm run build
         run: |
