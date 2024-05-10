@@ -13,8 +13,10 @@ jobs:
     strategy:
       matrix:
         node-version: ['20.x']
+
     env:
       CI: false
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +38,6 @@ jobs:
           npm install
           # npm audit fix --force
 
-
       - name: npm run build
         run: |
           npm run build
@@ -57,7 +58,7 @@ jobs:
         run: |
           sudo rm .gitignore
           git status
-          ls -alht dist
+          ls -alht
 
       # - name: Setup Pages  # Configures pages for deployment.
       #   id: pages
@@ -72,10 +73,25 @@ jobs:
       # - name: Upload page artifact
       #   uses: actions/upload-pages-artifact@v2
 
-      - name: upload artifact
-        uses: actions/upload-artifact@v2
+      - name: upload dist
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: |
             dist
+
+      - name: upload node_modules
+        uses: actions/upload-artifact@v4
+        with:
+          name: node_modules
+          path: |
+            node_modules
+
+      - name: upload .nuxt
+        uses: actions/upload-artifact@v4
+        with:
+          name: .nuxt
+          path: |
+            .nuxt
+            package-lock.json
 
