@@ -32,9 +32,9 @@ jobs:
         run: |
           npm run build
 
-      - name: npm run test
-        run: |
-          npm run test
+      # - name: npm run test # npm ERR! Missing script: "test"
+      #   run: |
+      #     npm run test
 
       - name: npm run lint
         run: |
