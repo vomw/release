@@ -53,7 +53,6 @@ jobs:
       - name: Check files
         run: |
           git status
-          clear
           ls -alhtR target
 
         
