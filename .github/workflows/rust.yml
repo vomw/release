@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy: 
       matrix:
-        target: [ armv7-unknown-linux-gnueabihf, arm-unknown-linux-gnueabi ]
+        target: [ armv7-unknown-linux-gnueabihf ]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -53,7 +53,7 @@ jobs:
       - name: Check files
         run: |
           git status
-          ls -alhtR target
+          ls -alht
 
         
       - name: upload artifact
