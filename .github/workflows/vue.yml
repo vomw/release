@@ -25,11 +25,12 @@ jobs:
           # npm install
           # npm run serve
           # CI=false npm install
-          npm ci
+          # npm ci
 
       - name: npm run build
         run: |
           npm run build
+          git status
 
       - name: npm run test
         run: |
