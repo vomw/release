@@ -7,7 +7,7 @@ module.exports = {
   target: 'static',
 
   sitemap: {
-    hostname: ".",
+    hostname: "",
     gzip: false
   },
 
