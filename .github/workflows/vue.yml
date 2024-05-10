@@ -20,8 +20,7 @@ jobs:
 
       - name: npm install
         run: |
-          npm help 
-          npm help npm
+          npm help install
           npm install
           # npm run serve
           # CI=false npm install
@@ -43,7 +42,7 @@ jobs:
       - name: check files
         run: |
           git status
-          ls -alht
+          ls -alht dist
 
       # - name: Setup Pages  # Configures pages for deployment.
       #   id: pages
@@ -55,8 +54,8 @@ jobs:
       #     source: ./dist/
       #     destination: ./_site
 
-      - name: Upload page artifact 
-        uses: actions/upload-pages-artifact@v2     
+      # - name: Upload page artifact 
+      #   uses: actions/upload-pages-artifact@v2     
 
       - name: upload artifact
         uses: actions/upload-artifact@v2
