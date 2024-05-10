@@ -29,8 +29,9 @@ jobs:
           npm help run
           # npm install --if-present
           # npm run serve
-          CI=false npm install
+          # CI=false npm install
           # npm ci
+          yarn install
 
       - name: npm run build
         run: |
