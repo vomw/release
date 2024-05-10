@@ -22,15 +22,15 @@ jobs:
         run: |
           npm help 
           npm help npm
-          # npm install
+          npm install
           # npm run serve
           # CI=false npm install
           # npm ci
+          git status
 
       - name: npm run build
         run: |
           npm run build
-          git status
 
       - name: npm run test
         run: |
