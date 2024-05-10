@@ -23,7 +23,7 @@ jobs:
           npm --help
           # npm install
           # npm run serve
-          CI=false npm install
+          # CI=false npm install
 
       - name: npm run build
         run: |
