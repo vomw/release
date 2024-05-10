@@ -51,10 +51,9 @@ jobs:
         run: |
           npm run generate
 
-
-
       - name: check files
         run: |
+          sudo rm .gitignore
           git status
           ls -alht dist
 
