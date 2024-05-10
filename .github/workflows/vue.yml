@@ -21,9 +21,9 @@ jobs:
       - name: npm
         run: |
           npm install
-          npm run serve
+          # npm run serve
           npm run build
-          # npm run test
+          npm run test
           npm run lint
           git status
           ls -alht
