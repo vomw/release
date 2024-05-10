@@ -60,8 +60,7 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: artifact
+          name: dist
           path: |
             dist
-            index.html
             
