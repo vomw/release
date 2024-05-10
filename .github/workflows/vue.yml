@@ -13,7 +13,8 @@ jobs:
     strategy:
       matrix:
         node-version: ['20.x']
-
+    env:
+      CI: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
