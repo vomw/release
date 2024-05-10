@@ -27,12 +27,14 @@ jobs:
         run: |
           npm version
           npm cache clean --force
-          npm install --help
+          npm help install
           # npm install --if-present
           # npm run serve
           # CI=false npm install
           # npm ci
           # yarn install
+          npm install
+          npm audit fix --force
 
 
       - name: npm run build
