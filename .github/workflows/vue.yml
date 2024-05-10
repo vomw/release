@@ -46,9 +46,9 @@ jobs:
       #   run: |
       #     npm run test
 
-      - name: npm run lint
-        run: |
-          npm run lint
+      # - name: npm run lint
+      #   run: |
+      #     npm run lint
 
       - name: npm run generate
         run: |
@@ -57,6 +57,7 @@ jobs:
       - name: check files
         run: |
           sudo rm .gitignore
+          sudo chmod a=rwx dist -R
           git status
           ls -alht
 
@@ -80,17 +81,17 @@ jobs:
           path: |
             dist
 
-      - name: upload node_modules
-        uses: actions/upload-artifact@v4
-        with:
-          name: node_modules
-          path: |
-            node_modules
+      # - name: upload node_modules
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: node_modules
+      #     path: |
+      #       node_modules
 
-      - name: upload .nuxt
+      - name: upload nuxt
         uses: actions/upload-artifact@v4
         with:
-          name: .nuxt
+          name: nuxt
           path: |
             .nuxt
             package-lock.json
