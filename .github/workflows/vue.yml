@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - run: corepack enable
       - name: environment
         uses: actions/setup-node@v4
         with:
@@ -38,9 +38,13 @@ jobs:
           npm install
           # npm audit fix --force
 
-      - name: npm run build
+      # - name: npm run build
+      #   run: |
+      #     npm run build
+
+      - name: npx nuxt build
         run: |
-          npm run build
+          npx nuxt build --preset github_pages
 
       # - name: npm run test # npm ERR! Missing script: "test"
       #   run: |
@@ -50,13 +54,13 @@ jobs:
       #   run: |
       #     npm run lint
 
-      - name: npm run generate
-        run: |
-          npm run generate
+      # - name: npm run generate
+      #   run: |
+      #     npm run generate
 
       - name: check files
         run: |
-          sudo rm .gitignore
+          # sudo rm .gitignore
           sudo chmod a=rwx dist -R
           git status
           ls -alht
@@ -74,12 +78,12 @@ jobs:
       # - name: Upload page artifact
       #   uses: actions/upload-pages-artifact@v2
 
-      - name: upload dist
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: |
-            dist
+      # - name: upload dist
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: dist
+      #     path: |
+      #       dist
 
       # - name: upload node_modules
       #   uses: actions/upload-artifact@v4
@@ -88,11 +92,28 @@ jobs:
       #     path: |
       #       node_modules
 
-      - name: upload nuxt
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuxt
-          path: |
-            .nuxt
-            package-lock.json
+      # - name: upload nuxt
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: nuxt
+      #     path: |
+      #       .nuxt
+      #       package-lock.json
 
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github_pages environment
+    environment:
+      name: github_pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
