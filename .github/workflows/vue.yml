@@ -58,12 +58,12 @@ jobs:
       #   run: |
       #     npm run generate
 
-      - name: check files
-        run: |
-          # sudo rm .gitignore
-          sudo chmod a=rwx dist -R
-          git status
-          ls -alht
+      # - name: check files
+      #   run: |
+      #     sudo rm .gitignore
+      #     sudo chmod a=rwx dist -R
+      #     git status
+      #     ls -alht
 
       # - name: Setup Pages  # Configures pages for deployment.
       #   id: pages
