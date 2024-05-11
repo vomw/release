@@ -54,9 +54,9 @@ jobs:
       #   run: |
       #     npm run lint
 
-      # - name: npm run generate
-      #   run: |
-      #     npm run generate
+      - name: npm run generate
+        run: |
+          npm run generate
 
       - name: check files
         run: |
