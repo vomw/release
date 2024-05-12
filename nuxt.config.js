@@ -77,3 +77,12 @@ module.exports = {
     }
   }
 };
+
+
+
+export default {
+  target: 'static',
+  router: {
+    base: '/sanctioned/'
+  }
+}
