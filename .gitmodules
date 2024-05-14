@@ -1,3 +1,0 @@
-[submodule "assets/dnscrypt-protocol"]
-	path = assets/dnscrypt-protocol
-	url = git@github.com:DNSCrypt/dnscrypt-protocol.git

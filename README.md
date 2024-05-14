@@ -1,22 +1,17 @@
-# dnscrypt-website
+[![Build Status](https://travis-ci.org/ameshkov/dnsstamps.svg?branch=master)](https://travis-ci.org/ameshkov/dnsstamps)
+[![Code Coverage](https://img.shields.io/codecov/c/github/ameshkov/dnsstamps/master.svg)](https://codecov.io/github/ameshkov/dnsstamps?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ameshkov/dnsstamps)](https://goreportcard.com/report/ameshkov/dnsstamps)
+[![Go Doc](https://godoc.org/github.com/ameshkov/dnsstamps?status.svg)](https://godoc.org/github.com/ameshkov/dnsstamps)
 
-> DNSCrypt website
+# DNS Stamps
 
-## Build Setup
+Implementation of [DNS stamps](https://dnscrypt.info/stamps-specifications/):
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+> Server stamps encode all the parameters required to connect to a secure DNS server as a single string.
+Think about stamps as QR code, but for DNS.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+Half of the code comes from the DNS stamps author: https://github.com/jedisct1/go-dnsstamps
 
-# build for production and launch server
-$ npm run build
-$ npm start
+This library was made for a single purpose - to add missing stamps implementations: plain DNS and DNS-over-TLS.
 
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+TODO: backport to https://github.com/jedisct1/go-dnsstamps

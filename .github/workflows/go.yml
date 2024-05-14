@@ -1,0 +1,64 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GOOS: windows
+      GOARCH: amd64
+      # GOARM: ${{ matrix.goarm }}
+      CGO_ENABLED: 0
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.18'
+      # run: |
+      #   sudo add-apt-repository ppa:longsleep/golang-backports
+      #   sudo apt update
+      #   sudo apt install golang-go
+
+
+    - name: Build
+      run: |
+        # mkdir /tmp/go
+        # export GOPATH=/tmp/go
+        which go
+        sudo go env 
+        # unset GOBIN
+        # set GOOS=windows
+        # set GOARCH=amd64
+        # go env 
+        sudo go get .
+        sudo go mod download
+        # sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
+        sudo go build -v -o dnsstamps.exe -trimpath -ldflags "-s -w -buildid=" ./..
+        # sudo go build -v ./...
+        # sudo go test
+        sudo rm.gitignore
+        git status
+        sudo chmod a=rwx *.exe
+        sudo ls -alht 
+        file dnsstamps.exe
+
+    # - name: Test
+    #   run: go test -v ./...
+
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: dnsstamps
+        path: dnsstamps.exe
