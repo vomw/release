@@ -80,15 +80,15 @@
 
 
 
-// export default {
-//   target: 'static',
-//   router: {
-//     base: '/sanctioned/'
-//   }
-// }
-
-
 export default {
-    baseURL: process.env.NODE_ENV === 'production' ? '/sanctioned/' : '/',
-    buildAssetsDir: '/static/'
+  target: 'static',
+  router: {
+    base: '/sanctioned/'
+  }
 }
+
+
+// export default {
+//     baseURL: process.env.NODE_ENV === 'production' ? '/sanctioned/' : '/',
+//     buildAssetsDir: '/static/'
+// }

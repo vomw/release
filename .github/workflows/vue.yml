@@ -30,6 +30,7 @@ jobs:
         run: |
           npm version
           npm cache clean --force
+          npm install push-dir --save-dev
           # npm install --if-present
           # npm run serve
           # CI=false npm install
