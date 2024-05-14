@@ -42,8 +42,8 @@ jobs:
         # set GOOS=windows
         # set GOARCH=amd64
         # go env 
-        # sudo go get .
-        sudo go mod download
+        sudo go get .
+        # sudo go mod download
         # sudo env GOOS=windows GOARCH=amd64 go build -o test.exe dnsstamps.go
         sudo go build -v -o dnsstamps.exe  ./..
         # sudo go build -v ./...
