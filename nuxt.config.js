@@ -93,4 +93,4 @@ export default defineNuxtConfig({
     baseURL: process.env.NODE_ENV === 'production' ? '/sanctioned/' : '/',
     buildAssetsDir: '/static/'
   }
-}
+})
