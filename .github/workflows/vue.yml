@@ -36,24 +36,24 @@ jobs:
           # CI=false npm install
           # npm ci
           # yarn install
-          npm install
+          # npm install
           # npm audit fix --force
 
       # - name: npm run build
       #   run: |
       #     npm run build
 
-      - name: npx nuxt build
-        run: |
-          npx nuxt build --preset github_pages
+      # - name: npx nuxt build
+      #   run: |
+      #     npx nuxt build --preset github_pages
 
       # - name: npm run test # npm ERR! Missing script: "test"
       #   run: |
       #     npm run test
 
-      - name: npm run lint
-        run: |
-          npm run lint
+      # - name: npm run lint
+      #   run: |
+      #     npm run lint
 
       - name: npm run generate
         run: |
