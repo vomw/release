@@ -38,6 +38,7 @@ jobs:
         # export GOPATH=/tmp/go
         which go
         sudo go env 
+        ls -alht
         # unset GOBIN
         # set GOOS=windows
         # set GOARCH=amd64
