@@ -38,7 +38,7 @@ jobs:
           C:\cygwin\bin\bash.exe -lc "cd thc-hydra && ./configure && make && rm .gitignore && git status"
 
       - name: Upload artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: hydra-windows
-            path: C:\cygwin\home\runneradmin\thc-hydra\hydra.exe
+        uses: actions/upload-artifact@v3
+        with:
+          name: hydra-windows
+          path: C:\cygwin\home\runneradmin\thc-hydra\hydra.exe
