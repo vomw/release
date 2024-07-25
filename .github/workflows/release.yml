@@ -38,8 +38,8 @@ jobs:
       - name: Compile THC-Hydra
         run: |
           
-          C:\cygwin\bin\bash.exe -c "ls -lht ./configure && ./configure && make"
-          git status
+          C:\cygwin\bin\bash.exe -c "./configure --debug && make"
+          C:\cygwin\bin\bash.exe -c "git status"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
