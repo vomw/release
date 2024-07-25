@@ -20,14 +20,11 @@ jobs:
         run: |
           choco install cygwin --params "/InstallDir:C:\cygwin"
           Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-          where refreshenv
           refreshenv
 
       - name: Download Cygwin setup-x86_64.exe
         run: |
           Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-          refreshenv
 
       - name: Install Required Packages
         run: |
@@ -37,12 +34,11 @@ jobs:
 
       - name: Compile THC-Hydra
         run: |
-          
-          C:\cygwin\bin\bash.exe -c "./configure --debug && make"
-          C:\cygwin\bin\bash.exe -c "git status"
+          C:\cygwin\bin\bash.exe -lc "git clone https://github.com/vanhauser-thc/thc-hydra.git"
+          C:\cygwin\bin\bash.exe -lc "cd thc-hydra && ./configure && make && rm .gitignore && git status"
 
-      - name: Upload artifact
+     - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: hydra-windows
-          path: hydra.exe
+          path: C:\cygwin\home\runneradmin\thc-hydra\hydra.exe
