@@ -1,38 +1,47 @@
-name: release
+name: Build and Upload
 
 on:
   push:
-    branches: [master, main]
-    tags-ignore: ['**']
-    paths-ignore: [README, TODO, PROBLEMS]
+    branches:
+      - main
   pull_request:
-    paths-ignore: [README, TODO, PROBLEMS]
+    branches:
+      - main
 
 jobs:
-  docker-image:
-    name: Build the docker image
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: docker/setup-qemu-action@v2
-
-      - uses: docker/setup-buildx-action@v2
-
-      - uses: docker/login-action@v2
+      - name: Set up Cygwin environment
+        uses: egor-tensin/setup-cygwin@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          packages: |
+            gcc-core
+            make
+            git
+            libssh-devel
+            libopenssl-devel
+            libidn-devel
+            libpcap-devel
+            libgcrypt-devel
+            libgpg-error-devel
+            libmariadbclient-devel
+            libpq-devel
+            libsqlite3-devel
 
-      - uses: gacts/github-slug@v1 # Action page: <https://github.com/gacts/github-slug>
-        id: slug
+      - name: Run Cygwin Bash Shell
+        shell: Cygwin {0}
+        run: |
+          ./configure
+          make
+          git status
 
-      - uses: docker/build-push-action@v3 # Action page: <https://github.com/docker/build-push-action>
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
         with:
-          context: .
-          file: Dockerfile
-          push: true
-          platforms: linux/amd64, linux/arm64
-#         ,linux/arm/v6, linux/arm/v7
-          tags: vanhauser/hydra:latest
-        
+          name: hydra-windows
+          path: hydra.exe
