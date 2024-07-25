@@ -31,8 +31,8 @@ jobs:
 
       - name: Install Required Packages
         run: |
-          C:\cygwin\bin\bash.exe -c "setup-x86_64.exe -h "
-          C:\cygwin\bin\bash.exe -c "setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel"
+          C:\cygwin\bin\bash.exe -c "C:\cygwin\setup-x86_64.exe -h "
+          C:\cygwin\bin\bash.exe -c "C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel"
 
       - name: Compile THC-Hydra
         run: |
