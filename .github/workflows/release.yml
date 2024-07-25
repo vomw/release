@@ -19,7 +19,7 @@ jobs:
       - name: Install Cygwin
         run: |
           choco install cygwin --params "/InstallDir:C:\cygwin"
-          refreshenv
+          cmd.exe /c "refreshenv"
 
       - name: Install Required Packages
         run: |
@@ -29,6 +29,7 @@ jobs:
         run: |
           
           C:\cygwin\bin\bash.exe -c "ls -lht ./configure && ./configure && make"
+          git status
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
