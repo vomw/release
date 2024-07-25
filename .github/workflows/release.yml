@@ -16,31 +16,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Cygwin environment
-        uses: egor-tensin/setup-cygwin@v3
-        with:
-          packages: |
-            gcc-core
-            make
-            git
-            libssh-devel
-            libopenssl-devel
-            libidn-devel
-            libpcap-devel
-            libgcrypt-devel
-            libgpg-error-devel
-            libmariadbclient-devel
-            libpq-devel
-            libsqlite3-devel
-
-      - name: Run Cygwin Bash Shell
-        shell: Cygwin {0}
+      - name: Install Cygwin
         run: |
-          ./configure
-          make
-          git status
+          choco install cygwin --params "/InstallDir:C:\cygwin"
+          refreshenv
 
-      - name: Archive build artifacts
+      - name: Install Required Packages
+        run: |
+          C:\cygwin\bin\bash.exe -c "setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel"
+
+      - name: Compile THC-Hydra
+        run: |
+          
+          C:\cygwin\bin\bash.exe -c "ls -lht ./configure && ./configure && make"
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: hydra-windows
