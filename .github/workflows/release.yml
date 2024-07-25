@@ -19,7 +19,9 @@ jobs:
       - name: Install Cygwin
         run: |
           choco install cygwin --params "/InstallDir:C:\cygwin"
-          cmd.exe /c "refreshenv"
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+          where refreshenv
+          refreshenv
 
       - name: Install Required Packages
         run: |
