@@ -69,7 +69,8 @@ jobs:
             # libsqlite3-devel
             # dos2unix
 
-
+            gcc-core
+            make
             libssl-dev 
             libssh-dev 
             libidn11-dev 
