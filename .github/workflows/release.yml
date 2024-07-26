@@ -21,18 +21,27 @@ jobs:
       - name: clone
         run: |
           git clone https://github.com/vanhauser-thc/thc-hydra.git
+
+      - name: delete
+        run: |
           cd thc-hydra
           sudo rm .gitignore
           sudo rm -rf .github
           sudo rm -rf .git
+
+      - name: move
+        run: |
           # mv {*,.*} ../
           sudo mv * ../
           sudo mv .* ../
           ls -alht
+
+      - name: git
+        run: |
           cd ..
           sudo rmdir thc-hydra
           git add .
-          git commit -m "git clone"
+          git commit -m "clone "
           git push
 
 
