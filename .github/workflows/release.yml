@@ -87,17 +87,17 @@ jobs:
               cd ${GITHUB_WORKSPACE}
               pwd
               ls -alht
-              sudo dos2unix *
-              sudo dos2unix .*
+              dos2unix *
+              dos2unix .*
               git status
-              sudo ./configure
+              # ./configure
               git config --global user.name 'vomw'
               git config --global user.email '22770640+vomw@users.noreply.github.com'
               git status
               git add .
-              git commit -m "configured "
+              git commit -m "configure 2 "
               git push
-              sudo make
+              make
               git status
           }
           basic
