@@ -52,7 +52,7 @@ jobs:
 
 
       - name: Set up Cygwin environment
-        uses: egor-tensin/setup-cygwin@v3
+        uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
             gcc-core
@@ -68,13 +68,23 @@ jobs:
             libpq-devel
             libsqlite3-devel
 
-      - name: Run Cygwin Bash Shell
-        shell: Cygwin {0}
+      # set Cygwin's bash as the shell to use:
+      - name: Bash shell
         run: |
-          ./configure
-          git status
-          make
-          git status
+          # This is a real bash script!
+          basic() {
+              pwd
+              ls -alht
+              ./configure
+              git status
+              make
+              git status
+          }
+          basic
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+
+
+
 
 
       - name: Archive build artifacts
