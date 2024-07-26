@@ -35,7 +35,8 @@ jobs:
       - name: Compile THC-Hydra
         run: |
           C:\cygwin\bin\bash.exe -lc "git clone https://github.com/vanhauser-thc/thc-hydra.git"
-          C:\cygwin\bin\bash.exe -lc "cd thc-hydra && ./configure && make && rm .gitignore && git status"
+          C:\cygwin\bin\bash.exe -lc "dos2unix --help"
+          C:\cygwin\bin\bash.exe -lc "cd thc-hydra && dos2unix * && ./configure && make && rm .gitignore && git status"
           # C:\cygwin\bin\bash.exe -c "dos2unix *"
           # C:\cygwin\bin\bash.exe -c "./configure --debug && make"
           # C:\cygwin\bin\bash.exe -c "git status"
