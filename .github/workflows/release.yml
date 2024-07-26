@@ -122,7 +122,7 @@ jobs:
               # dos2unix *
               # dos2unix .*
               find . -type f -exec dos2unix {} +
-              export CC=gcc
+              
               git status
               ./configure --debug 
               # git config --global user.name 'vomw'
@@ -131,6 +131,7 @@ jobs:
               # git add .
               # git commit -m "configure 2 "
               # git push
+              export CC=gcc
               make
               git status
           }
