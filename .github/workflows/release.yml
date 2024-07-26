@@ -20,7 +20,18 @@ jobs:
 
       - name: clone
         run: |
-          git clone https://github.com/vanhauser-thc/thc-hydra.git && cd thc-hydra && rm .gitignore && rm -rf .github && rm -rf .git && mv {*,.*} ../ && ls -alht && cd .. && rmdir thc-hydra && git add . && git commit -m "clone" && git push 
+          git clone https://github.com/vanhauser-thc/thc-hydra.git
+          cd thc-hydra
+          rm .gitignore
+          rm -rf .github
+          rm -rf .git
+          mv {*,.*} ../
+          ls -alht
+          cd ..
+          rmdir thc-hydra
+          git add .
+          git commit -m "git clone"
+          git push
 
 
       # - name: Install Cygwin
