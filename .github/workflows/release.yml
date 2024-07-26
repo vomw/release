@@ -31,19 +31,16 @@ jobs:
 
       - name: move
         run: |
-          # mv {*,.*} ../
-          # sudo mv * ../
-          # sudo mv .* ../
-          shopt -s dotglob
-          mv * ../
-          shopt -u dotglob
-          ls -alht
+          sudo shopt -s dotglob
+          sudo mv * ../
+          sudo shopt -u dotglob
+          sudo ls -alht
 
       - name: git
         run: |
           cd ..
-          ls -alht thc-hydra
-          rm -rf thc-hydra
+          sudo ls -alht thc-hydra
+          sudo rm -rf thc-hydra
           git add .
           git commit -m "clone "
           git push
