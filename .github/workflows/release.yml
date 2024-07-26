@@ -68,11 +68,23 @@ jobs:
             libpq-devel
             libsqlite3-devel
 
+
+
+      - name: debug
+        run: |
+          dir
+          pwd
+          echo ${GITHUB_WORKSPACE}
+          cd ${GITHUB_WORKSPACE}
+          dir
+     
+
       # set Cygwin's bash as the shell to use:
       - name: Bash shell
         run: |
           # This is a real bash script!
           basic() {
+              cd  ${GITHUB_WORKSPACE}
               pwd
               ls -alht
               ./configure
