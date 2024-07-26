@@ -42,7 +42,8 @@ jobs:
       - name: git
         run: |
           cd ..
-          sudo rmdir thc-hydra
+          ls -alht thc-hydra
+          rm -rf thc-hydra
           git add .
           git commit -m "clone "
           git push
