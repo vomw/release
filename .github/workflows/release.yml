@@ -87,6 +87,7 @@ jobs:
               cd ${GITHUB_WORKSPACE}
               pwd
               ls -alht
+              git config core.autocrlf true
               dos2unix *
               dos2unix .*
               git status
