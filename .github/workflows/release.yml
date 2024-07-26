@@ -31,9 +31,9 @@ jobs:
 
       - name: move
         run: |
-          sudo shopt -s dotglob
+          shopt -s dotglob
           sudo mv * ../
-          sudo shopt -u dotglob
+          shopt -u dotglob
           sudo ls -alht
 
       - name: git
