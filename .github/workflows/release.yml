@@ -28,9 +28,11 @@ jobs:
           sudo rm .gitignore
           sudo rm -rf .github
           sudo rm -rf .git
+          sudo chmod a=rwx * -R
 
       - name: move
         run: |
+          cd thc-hydra
           shopt -s dotglob
           sudo mv * ../
           shopt -u dotglob
@@ -38,7 +40,6 @@ jobs:
 
       - name: git
         run: |
-          cd ..
           sudo ls -alht thc-hydra
           sudo rm -rf thc-hydra
           git add .
