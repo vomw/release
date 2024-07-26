@@ -10,41 +10,59 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    # runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Cygwin
+
+      - name: clone
         run: |
-          choco install cygwin --params "/InstallDir:C:\cygwin"
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-          refreshenv
-
-      - name: Download Cygwin setup-x86_64.exe
-        run: |
-          Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
-
-      - name: Install Required Packages
-        run: |
-          C:\cygwin\setup-x86_64.exe -h 
-          # C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel 
-          C:\cygwin\setup-x86_64.exe -q -P libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev
-
-      - name: Compile THC-Hydra
-        run: |
-          C:\cygwin\bin\bash.exe -lc "git clone https://github.com/vanhauser-thc/thc-hydra.git"
-          C:\cygwin\bin\bash.exe -lc "dos2unix --help"
-          C:\cygwin\bin\bash.exe -lc "cd thc-hydra && dos2unix * && rm .gitignore && ./configure && git status"
-          C:\cygwin\bin\bash.exe -lc "cd thc-hydra && make && git status"          
-          # C:\cygwin\bin\bash.exe -c "dos2unix *"
-          # C:\cygwin\bin\bash.exe -c "./configure --debug && make"
-          # C:\cygwin\bin\bash.exe -c "git status"
+          git clone https://github.com/vanhauser-thc/thc-hydra.git
+          cd thc-hydra
+          rm .gitignore
+          rm -rf .github
+          rm -rf .git
+          mv * ../
+          ls -alht
+          cd ..
+          rmdir thc-hydra
+          git add .
+          git commit -m "git clone"
+          git push
 
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: hydra-windows
-          path: C:\cygwin\home\runneradmin\thc-hydra\hydra.exe
+      # - name: Install Cygwin
+      #   run: |
+      #     choco install cygwin --params "/InstallDir:C:\cygwin"
+      #     Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+      #     refreshenv
+
+      # - name: Download Cygwin setup-x86_64.exe
+      #   run: |
+      #     Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
+
+      # - name: Install Required Packages
+      #   run: |
+      #     C:\cygwin\setup-x86_64.exe -h 
+      #     # C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel 
+      #     C:\cygwin\setup-x86_64.exe -q -P libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev
+
+      # - name: Compile THC-Hydra
+      #   run: |
+      #     C:\cygwin\bin\bash.exe -lc "git clone https://github.com/vanhauser-thc/thc-hydra.git"
+      #     C:\cygwin\bin\bash.exe -lc "dos2unix --help"
+      #     C:\cygwin\bin\bash.exe -lc "cd thc-hydra && dos2unix * && rm .gitignore && ./configure && git status"
+      #     C:\cygwin\bin\bash.exe -lc "cd thc-hydra && make && git status"          
+      #     # C:\cygwin\bin\bash.exe -c "dos2unix *"
+      #     # C:\cygwin\bin\bash.exe -c "./configure --debug && make"
+      #     # C:\cygwin\bin\bash.exe -c "git status"
+
+
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: hydra-windows
+      #     path: C:\cygwin\home\runneradmin\thc-hydra\hydra.exe
