@@ -124,13 +124,10 @@ jobs:
               find . -type f -exec dos2unix {} +
               
               git status
-              ./configure --debug 
+              ./configure --debug --disable-xhydra --prefix=$PWD/build
               # git config --global user.name 'vomw'
               # git config --global user.email '22770640+vomw@users.noreply.github.com'
               git status
-              # git add .
-              # git commit -m "configure 2 "
-              # git push
               export CC=gcc
               make
               git status
