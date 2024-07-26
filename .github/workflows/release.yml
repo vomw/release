@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+permissions:
+  contents: write      
 
 jobs:
   build:
@@ -42,6 +44,8 @@ jobs:
         run: |
           sudo ls -alht thc-hydra
           sudo rm -rf thc-hydra
+          git config --global user.name 'vomw'
+          git config --global user.email '22770640+vomw@users.noreply.github.com'
           git add .
           git commit -m "clone "
           git push
