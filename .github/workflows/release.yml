@@ -55,18 +55,32 @@ jobs:
         uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
-            gcc-core
-            make
-            git
-            libssh-devel
-            libopenssl-devel
-            libidn-devel
-            libpcap-devel
-            libgcrypt-devel
-            libgpg-error-devel
-            libmariadbclient-devel
-            libpq-devel
-            libsqlite3-devel
+            libssl-dev 
+            libssh-dev 
+            libidn11-dev 
+            libpcre3-dev 
+            libgtk2.0-dev 
+            libmysqlclient-dev 
+            libpq-dev 
+            libsvn-dev 
+            firebird-dev 
+            libmemcached-dev 
+            libgpg-error-dev 
+            libgcrypt11-dev 
+            libgcrypt20-dev
+
+            # gcc-core
+            # make
+            # git
+            # libssh-devel
+            # libopenssl-devel
+            # libidn-devel
+            # libpcap-devel
+            # libgcrypt-devel
+            # libgpg-error-devel
+            # libmariadbclient-devel
+            # libpq-devel
+            # libsqlite3-devel
 
 
 
@@ -88,12 +102,12 @@ jobs:
               pwd
               ls -alht
               git config core.autocrlf true
-              dos2unix *
-              dos2unix .*
+              # dos2unix *
+              # dos2unix .*
               git status
-              # ./configure
-              git config --global user.name 'vomw'
-              git config --global user.email '22770640+vomw@users.noreply.github.com'
+              ./configure
+              # git config --global user.name 'vomw'
+              # git config --global user.email '22770640+vomw@users.noreply.github.com'
               git status
               # git add .
               # git commit -m "configure 2 "
