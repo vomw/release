@@ -119,16 +119,14 @@ jobs:
               pwd
               ls -alht
               # git config core.autocrlf true
-              # dos2unix *
-              # dos2unix .*
               find . -type f -exec dos2unix {} +
-              
               git status
+              export CC=gcc
               ./configure --debug --disable-xhydra --prefix=$PWD/build
               # git config --global user.name 'vomw'
               # git config --global user.email '22770640+vomw@users.noreply.github.com'
               git status
-              export CC=gcc
+
               make
               git status
           }
