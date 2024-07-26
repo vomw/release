@@ -69,8 +69,7 @@ jobs:
             # libsqlite3-devel
             # dos2unix
 
-            gcc-core
-            make
+
             libssl-dev 
             libssh-dev 
             libidn11-dev 
@@ -84,6 +83,8 @@ jobs:
             libgpg-error-dev 
             libgcrypt11-dev 
             libgcrypt20-dev
+            gcc-core
+            cmake
 
             # gcc-core
             # make
