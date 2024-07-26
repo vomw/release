@@ -25,7 +25,9 @@ jobs:
           rm .gitignore
           rm -rf .github
           rm -rf .git
-          mv {*,.*} ../
+          # mv {*,.*} ../
+          mv * ../
+          mv .* ../
           ls -alht
           cd ..
           rmdir thc-hydra
