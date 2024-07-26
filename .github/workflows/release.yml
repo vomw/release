@@ -84,9 +84,12 @@ jobs:
         run: |
           # This is a real bash script!
           basic() {
-              cd  ${GITHUB_WORKSPACE}
+              cd ${GITHUB_WORKSPACE}
               pwd
               ls -alht
+              dos2unix *
+              dos2unix .*
+              git status
               ./configure
               git status
               make
