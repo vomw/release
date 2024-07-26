@@ -122,7 +122,7 @@ jobs:
               find . -type f -exec dos2unix {} +
               export CC=gcc
               git status
-              ./configure
+              ./configure --debug 
               # git config --global user.name 'vomw'
               # git config --global user.email '22770640+vomw@users.noreply.github.com'
               git status
@@ -134,10 +134,6 @@ jobs:
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-
-
-
-
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
