@@ -71,8 +71,6 @@ jobs:
       - name: Run Cygwin Bash Shell
         shell: Cygwin {0}
         run: |
-          pwd
-          ls -alht
           ./configure
           git status
           make
