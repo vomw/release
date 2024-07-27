@@ -25,6 +25,7 @@ jobs:
       - name: Install Cygwin
         run: |
           choco install cygwin -y --params "/InstallDir:C:\cygwin"
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           refreshenv
 
       - name: Download Cygwin setup-x86_64.exe
