@@ -40,14 +40,12 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}
           pwd
-          ls -alht
           C:\cygwin\bin\bash.exe -lc "ls -lht / && dos2unix configure"
 
       - name: Compile THC-Hydra
         run: |
           cd ${GITHUB_WORKSPACE} 
           pwd
-          ls -alht
           C:\cygwin\bin\bash.exe -lc "mount && ./configure && make"
 
       - name: Upload artifact
