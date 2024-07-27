@@ -61,7 +61,7 @@ jobs:
               cd ${GITHUB_WORKSPACE}
               ls -alth
               export CC=gcc
-              ./configure
+              ./configure --debug --prefix=$PWD/build
               git status
           }
           basic
@@ -138,5 +138,6 @@ jobs:
         with:
           name: hydra-windows
           path: |
-            pw-inspector.exe
-            hydra.exe
+            build
+            # pw-inspector.exe
+            # hydra.exe
