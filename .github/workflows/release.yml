@@ -44,13 +44,13 @@ jobs:
           # pwd
           # dir
           # C:\cygwin\bin\bash.exe --help
-          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ls -alth && dos2unix configure"
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ls -alth && dos2unix configure && git status"
 
       - name: Compile THC-Hydra
         run: |
           # cd ${GITHUB_WORKSPACE} 
           # pwd
-          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ./configure --debug --disable-xhydra --prefix=$PWD/build && make"
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && export CC=gcc && ./configure --debug --disable-xhydra --prefix=$PWD/build && make"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
