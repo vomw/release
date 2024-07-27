@@ -40,7 +40,7 @@ jobs:
       - name: debug
         run: |
           C:\cygwin\bin\bash.exe --help
-          C:\cygwin\bin\bash.exe -lc "find / -name setup-x86_64.exe && find / -name setup-*.exe && find / -name ssl.h "
+          C:\cygwin\bin\bash.exe -lc "find /cygdrive/c/cygwin -name setup-x86_64.exe && find /cygdrive/c/cygwin -name setup-*.exe && find /cygdrive/c/cygwin -name ssl.h "
 
 
       - name: Convert Line Endings
