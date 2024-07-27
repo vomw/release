@@ -38,11 +38,13 @@ jobs:
 
       - name: Convert Line Endings
         run: |
-          C:\cygwin\bin\bash.exe -lc "cd ${GITHUB_WORKSPACE} && pwd && ls -alht && dos2unix configure"
+          cd ${GITHUB_WORKSPACE}
+          C:\cygwin\bin\bash.exe -lc "pwd && ls -alht && dos2unix configure"
 
       - name: Compile THC-Hydra
         run: |
-          C:\cygwin\bin\bash.exe -lc "cd ${GITHUB_WORKSPACE} && pwd && ls -alht && ./configure && make"
+          cd ${GITHUB_WORKSPACE} 
+          C:\cygwin\bin\bash.exe -lc "pwd && ls -alht && ./configure && make"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
