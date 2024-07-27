@@ -25,7 +25,7 @@ jobs:
       - name: verify pkg
         run: |
           basic() {
-              pwd
+              cygpath -w "$(pwd)"
               cygcheck -c gcc-core make git libssh-devel libopenssl-devel libidn-devel libpcap-devel libgcrypt-devel libgpg-error-devel libmariadb-devel libpq-devel libsqlite3-devel dos2unix
           }
           basic
@@ -40,6 +40,7 @@ jobs:
           basic() {
               pwd
               cd ${GITHUB_WORKSPACE}
+              cygpath -w "$(pwd)"
               ls -alth
               export CC=gcc
               dos2unix configure
@@ -136,4 +137,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hydra-windows
-          path: $GITHUB_WORKSPACE/hydra.exe
+          path: pw-inspector.exe,hydra.exe
