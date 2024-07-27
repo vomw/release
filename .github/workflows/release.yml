@@ -39,10 +39,11 @@ jobs:
       - name: Convert Line Endings
         run: |
           echo ${GITHUB_WORKSPACE}
-          cd ${GITHUB_WORKSPACE}
           pwd
+          git status
+          cd ${GITHUB_WORKSPACE}
           dir
-          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/c && ls -alth && dos2unix configure"
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/c/Users/runneradmin && ls -alth && dos2unix configure"
 
       - name: Compile THC-Hydra
         run: |
