@@ -40,17 +40,17 @@ jobs:
         run: |
           pwd
           echo ${GITHUB_WORKSPACE}
-          git status
           cd ${GITHUB_WORKSPACE}
-          dir
-          C:\cygwin\bin\bash.exe --help
-          # C:\cygwin\bin\bash.exe -lc "cd /cygdrive/c/Users/runneradmin && ls -alth && dos2unix configure"
+          pwd
+          # dir
+          # C:\cygwin\bin\bash.exe --help
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ls -alth && dos2unix configure"
 
       - name: Compile THC-Hydra
         run: |
           cd ${GITHUB_WORKSPACE} 
           pwd
-          C:\cygwin\bin\bash.exe -lc "./configure && make"
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ./configure && make"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
