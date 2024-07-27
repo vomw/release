@@ -28,13 +28,20 @@ jobs:
           Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           refreshenv
 
-      - name: Download Cygwin setup-x86_64.exe
-        run: |
-          Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
+      # - name: Download Cygwin setup-x86_64.exe
+      #   run: |
+      #     Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
 
-      - name: Install Required Packages
+      # - name: Install Required Packages
+      #   run: |
+      #     C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel,dos2unix,libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev,openssl
+
+
+      - name: debug
         run: |
-          C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel,dos2unix,libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev,openssl
+          C:\cygwin\bin\bash.exe --help
+          C:\cygwin\bin\bash.exe -lc "find / -name setup-x86_64.exe && find / -name setup-*.exe && find / -name ssl.h "
+
 
       - name: Convert Line Endings
         run: |
