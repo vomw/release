@@ -61,6 +61,9 @@ jobs:
               cd ${GITHUB_WORKSPACE}
               ls -alth
               export CC=gcc
+              echo $PWD/build
+              mkdir $PWD/build
+              ls $PWD/build -alht
               ./configure --debug --prefix=$PWD/build
               git status
           }
