@@ -137,4 +137,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hydra-windows
-          path: pw-inspector.exe,hydra.exe
+          path: |
+            pw-inspector.exe
+            hydra.exe
