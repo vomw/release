@@ -38,9 +38,11 @@ jobs:
 
       - name: Convert Line Endings
         run: |
+          echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}
           pwd
-          C:\cygwin\bin\bash.exe -lc "mount && ls / && df -h && dos2unix configure"
+          dir
+          C:\cygwin\bin\bash.exe -lc "cd /cygdrive/c && ls -alth && dos2unix configure"
 
       - name: Compile THC-Hydra
         run: |
