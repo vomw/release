@@ -79,8 +79,8 @@ jobs:
               make install
               git status
               ls $PWD/build -alht  
-              find . -name *.exe
-              find . -name *.dll            
+              find . -name "*.exe"
+              find . -name "*.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
