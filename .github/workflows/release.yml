@@ -31,10 +31,6 @@ jobs:
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
-
-
-
-
       - name: dos2unix
         run: |
           basic() {
@@ -68,8 +64,6 @@ jobs:
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
-
-
       - name: make
         run: |
           basic() {
@@ -78,8 +72,8 @@ jobs:
               export CC=gcc
               make
               ls $PWD/build -alht  
-              find . -name "*.exe"
-              find . -name "*.dll"   
+              find . -iname "*.exe"
+              find . -iname "*.dll"   
               make install           
           }
           basic
@@ -92,8 +86,8 @@ jobs:
               cd ${GITHUB_WORKSPACE}/build
               export CC=gcc
               # ldd hydra.exe | grep -iv WINDOWS | cut -d '>' -f 2 | cut -d ' ' -f 2-|sed -r 's/(.*)\s[(].*/\1/g'| xargs -n1 -I {} sh -c 'cp "{}" .'
-              ldd hydra.exe | grep -iv WINDOWS | awk '{print $3}' | sed -r 's/(.*)\s[(].*/\1/g' | xargs -n1 -I {} cp "{}" .
-              zip -r build.zip build
+              ldd ./hydra.exe | grep -iv WINDOWS | awk '{print $3}' | sed -r 's/(.*)\s[(].*/\1/g' | xargs -n1 -I {} cp "{}" .
+              zip -r build.zip ./build
               ls -lh build.zip
               git status         
           }
@@ -144,10 +138,6 @@ jobs:
       #     # cd ${GITHUB_WORKSPACE} 
       #     # pwd
       #     C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && export CC=gcc && ./configure --debug --disable-xhydra --prefix=$PWD/build && make"
-
-
-
-
 
 
       - name: Upload artifact
