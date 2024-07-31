@@ -77,30 +77,28 @@ jobs:
               cd ${GITHUB_WORKSPACE}
               export CC=gcc
               make
-              ls -alhtR ./build
-              make install
-              git status
               ls $PWD/build -alht  
               find . -name "*.exe"
-              find . -name "*.dll"
-              zip -r build.zip build
-              ls -lh build.zip
-              
+              find . -name "*.dll"   
+              make install           
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
-      # - name: ldd
-      #   run: |
-      #     basic() {
-      #         cd ${GITHUB_WORKSPACE}
-      #         export CC=gcc
-      #         ldd hydra.exe | grep -iv WINDOWS | cut -d '>' -f 2 | cut -d ' ' -f 2-|sed -r 's/(.*)\s[(].*/\1/g'| xargs -n1 -I {} sh -c 'cp "{}" .'
-      #         git status         
-      #     }
-      #     basic
-      #   shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+      - name: ldd
+        run: |
+          basic() {
+              cd ${GITHUB_WORKSPACE}/build
+              export CC=gcc
+              # ldd hydra.exe | grep -iv WINDOWS | cut -d '>' -f 2 | cut -d ' ' -f 2-|sed -r 's/(.*)\s[(].*/\1/g'| xargs -n1 -I {} sh -c 'cp "{}" .'
+              ldd hydra.exe | grep -iv WINDOWS | awk '{print $3}' | sed -r 's/(.*)\s[(].*/\1/g' | xargs -n1 -I {} cp "{}" .
+              zip -r build.zip build
+              ls -lh build.zip
+              git status         
+          }
+          basic
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
 
