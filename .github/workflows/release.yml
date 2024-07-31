@@ -20,7 +20,7 @@ jobs:
         uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
-            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel, libmariadbclient-devel,libpq-devel,libsqlite3-devel,dos2unix,libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev,openssl,
+            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel, libmariadbclient-devel,libpq-devel,libsqlite3-devel,dos2unix,libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev,openssl,zip
 
       - name: verify pkg
         run: |
@@ -73,15 +73,18 @@ jobs:
       - name: make
         run: |
           basic() {
+              zip --help
               cd ${GITHUB_WORKSPACE}
               export CC=gcc
               make
+              ls -alhtR ./build
               make install
               git status
               ls $PWD/build -alht  
               find . -name "*.exe"
               find . -name "*.dll"
-              ls -alhtR ./build
+              zip -r build.zip build
+              
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -153,6 +156,6 @@ jobs:
         with:
           name: hydra-windows
           path: |
-            ${GITHUB_WORKSPACE}/build
+            ${GITHUB_WORKSPACE}/build.zip
 
 
