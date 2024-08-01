@@ -113,6 +113,22 @@ jobs:
 
 
 
+      - name: copy
+        run: |
+          basic() {
+              export CC=gcc
+              cd ${GITHUB_WORKSPACE}/build
+              cp /cygdrive/c/tools/cygwin/bin/cygwin1.dll .
+              cp /cygdrive/c/tools/cygwin/bin/cygidn-12.dll .
+              cp /cygdrive/c/tools/cygwin/bin/cygcrypto-3.dll .
+              cp /cygdrive/c/tools/cygwin/bin/cyggcrypt-20.dll .
+              ls -alht
+          }
+          basic
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+
+
+
 
 
       - name: zip
