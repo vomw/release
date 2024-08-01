@@ -95,6 +95,24 @@ jobs:
       #   shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
+      - name: find
+        run: |
+          basic() {
+              export CC=gcc
+              cd ${GITHUB_WORKSPACE}
+              find --help
+              find /cygdrive/ -iname "cygwin1.dll"
+              find /cygdrive/ -iname "cygidn-12.dll"
+              find /cygdrive/ -iname "cygcrypto-3.dll"
+              find /cygdrive/ -iname "cyggcrypt-20.dll"
+          }
+          basic
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+
+
+
+
+
 
       - name: zip
         run: |
