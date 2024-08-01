@@ -99,12 +99,13 @@ jobs:
         run: |
           basic() {
               export CC=gcc
-              cd ${GITHUB_WORKSPACE}
-              find --help
-              find /cygdrive/ -iname "cygwin1.dll"
-              find /cygdrive/ -iname "cygidn-12.dll"
-              find /cygdrive/ -iname "cygcrypto-3.dll"
-              find /cygdrive/ -iname "cyggcrypt-20.dll"
+              ls -alht /bin/
+              cd /cygdrive/c/tools/cygwin
+              ls -alht
+              find /cygdrive/c/tools/cygwin -iname "cygwin1.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygidn-12.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygcrypto-3.dll"
+              find /cygdrive/c/tools/cygwin -iname "cyggcrypt-20.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
