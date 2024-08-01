@@ -102,10 +102,14 @@ jobs:
               ls -alht /bin/
               cd /cygdrive/c/tools/cygwin
               ls -alht
-              find /cygdrive/c/tools/cygwin -iname "cygwin1.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygidn-12.dll"
               find /cygdrive/c/tools/cygwin -iname "cygcrypto-3.dll"
               find /cygdrive/c/tools/cygwin -iname "cyggcrypt-20.dll"
+              find /cygdrive/c/tools/cygwin -iname "cyggpg-erroe-0.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygidn-12.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygpg-5.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygssh-4.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygssl-3.dll"
+              find /cygdrive/c/tools/cygwin -iname "cygwin1.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -118,10 +122,14 @@ jobs:
           basic() {
               export CC=gcc
               cd ${GITHUB_WORKSPACE}/build
-              cp /cygdrive/c/tools/cygwin/bin/cygwin1.dll .
-              cp /cygdrive/c/tools/cygwin/bin/cygidn-12.dll .
               cp /cygdrive/c/tools/cygwin/bin/cygcrypto-3.dll .
               cp /cygdrive/c/tools/cygwin/bin/cyggcrypt-20.dll .
+              cp /cygdrive/c/tools/cygwin/bin/cyggpg-erroe-0.dll . 
+              cp /cygdrive/c/tools/cygwin/bin/cygidn-12.dll .
+              cp /cygdrive/c/tools/cygwin/bin/cygpg-5.dll . 
+              cp /cygdrive/c/tools/cygwin/bin/cygssh-4.dll . 
+              cp /cygdrive/c/tools/cygwin/bin/cygssl-3.dll . 
+              cp /cygdrive/c/tools/cygwin/bin/cygwin1.dll .
               ls -alht
           }
           basic
