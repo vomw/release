@@ -20,8 +20,7 @@ jobs:
         uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
-            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libpq-devel,libsqlite3-devel,dos2unix,openssl,zip,
-
+            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libpq-devel,libsqlite3-devel,dos2unix,openssl,zip,libpq5,
       - name: verify pkg
         run: |
           basic() {
@@ -99,18 +98,7 @@ jobs:
         run: |
           basic() {
               export CC=gcc
-              ls -alht /bin/
-              cd /cygdrive/c/tools/cygwin
-              ls -alht
-              find /cygdrive/c/tools/cygwin -iname "cygcrypto-3.dll"
-              find /cygdrive/c/tools/cygwin -iname "cyggcrypt-20.dll"
-              find /cygdrive/c/tools/cygwin -iname "cyggpg-error-0.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygidn-12.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygpg-5.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygssh-4.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygssl-3.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygwin1.dll"
-              find /cygdrive/c/tools/cygwin -iname "cygz.dll"
+              find /cygdrive/c/tools/cygwin -type f -iname "*.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -123,15 +111,8 @@ jobs:
           basic() {
               export CC=gcc
               cd ${GITHUB_WORKSPACE}/build
-              cp /cygdrive/c/tools/cygwin/bin/cygcrypto-3.dll .
-              cp /cygdrive/c/tools/cygwin/bin/cyggcrypt-20.dll .
-              cp /cygdrive/c/tools/cygwin/bin/cyggpg-error-0.dll . 
-              cp /cygdrive/c/tools/cygwin/bin/cygidn-12.dll .
-              cp /cygdrive/c/tools/cygwin/bin/cygpg-5.dll . 
-              cp /cygdrive/c/tools/cygwin/bin/cygssh-4.dll . 
-              cp /cygdrive/c/tools/cygwin/bin/cygssl-3.dll . 
-              cp /cygdrive/c/tools/cygwin/bin/cygwin1.dll .
-              cp /cygdrive/c/tools/cygwin/bin/cygz.dll .
+              # find /cygdrive/c/tools/cygwin -type f -iname "*.dll" -exec cp {} . \;
+              find /cygdrive/c/tools/cygwin -type f -iname "*.dll" -print0 | xargs -0 -I {} cp {} .
               ls -alht
           }
           basic
