@@ -98,7 +98,7 @@ jobs:
         run: |
           basic() {
               export CC=gcc
-              find /cygdrive/c/tools/cygwin -type f -iname "*.dll"
+              find /cygdrive/c/tools/cygwin/bin -type f -iname "*.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -111,8 +111,8 @@ jobs:
           basic() {
               export CC=gcc
               cd ${GITHUB_WORKSPACE}/build
-              # find /cygdrive/c/tools/cygwin -type f -iname "*.dll" -exec cp {} . \;
-              find /cygdrive/c/tools/cygwin -type f -iname "*.dll" -print0 | xargs -0 -I {} cp {} .
+              # find /cygdrive/c/tools/cygwin/bin -type f -iname "*.dll" -exec cp {} . \;
+              find /cygdrive/c/tools/cygwin/bin -type f -iname "*.dll" -print0 | xargs -0 -I {} cp {} .
               ls -alht
           }
           basic
