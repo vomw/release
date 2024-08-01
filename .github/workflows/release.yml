@@ -1,4 +1,4 @@
-name: Build and Upload 
+name: Build and Upload hydra-windows
 
 on:
   push:
@@ -16,16 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+
       - name: Set up Cygwin environment
         uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
             gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libpq-devel,libsqlite3-devel,dos2unix,openssl,zip,
+
+
       - name: verify pkg
         run: |
           basic() {
               cygpath -w "$(pwd)"
-              cygcheck -c gcc-core make git libssh-devel libopenssl-devel libidn-devel libpcap-devel libgcrypt-devel libgpg-error-devel libmariadb-devel libpq-devel libsqlite3-devel dos2unix
+              cygcheck -c gcc-core make git libssh-devel libopenssl-devel libidn-devel libpcap-devel libgcrypt-devel libgpg-error-devel libpq-devel libsqlite3-devel dos2unix openssl zip
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -33,17 +36,8 @@ jobs:
       - name: dos2unix
         run: |
           basic() {
-              pwd
               cd ${GITHUB_WORKSPACE}
-              cygpath -w "$(pwd)"
-              ls -alth
-              export CC=gcc
               dos2unix configure
-              git config --global --add safe.directory '*'
-              git config --global user.name 'vomw'
-              git config --global user.email '22770640+vomw@users.noreply.github.com'
-              git status
-              git remote -v
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -53,11 +47,8 @@ jobs:
         run: |
           basic() {
               cd ${GITHUB_WORKSPACE}
-              export CC=gcc
-              echo $PWD/build
               mkdir $PWD/build
-              ./configure --debug --disable-xhydra --prefix=$PWD/build
-              git status
+              ./configure --debug --prefix=$PWD/build
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
@@ -66,119 +57,44 @@ jobs:
       - name: make
         run: |
           basic() {
-              zip --help
               cd ${GITHUB_WORKSPACE}
               export CC=gcc
-              make
-              ls $PWD/build -alht  
-              find . -iname "*.exe"
-              find . -iname "*.dll"   
-              make install
-              chmod a=rwx build -R        
+              make 
+              make install  
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
-      # - name: ldd
-      #   run: |
-      #     basic() {
-      #         export CC=gcc
-      #         cd ${GITHUB_WORKSPACE}/build/bin              
-      #         ldd hydra.exe | grep -iv WINDOWS | cut -d '>' -f 2 | cut -d ' ' -f 2-|sed -r 's/(.*)\s[(].*/\1/g'| xargs -n1 -I {} sh -c 'cp "{}" .'
-      #         pwd
-      #         ls -alht hydra.exe
-      #         # ldd hydra.exe | grep -iv WINDOWS | awk '{print $3}' | sed -r 's/(.*)\s[(].*/\1/g' | xargs -n1 -I {} cp "{}" .   
-      #     }
-      #     basic
-      #   shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-
-
-      - name: find
+      - name: find dll
         run: |
           basic() {
-              export CC=gcc
               find /cygdrive/c/tools/cygwin/ -type f -iname "*.dll"
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
 
-
-
-      - name: copy
+      - name: copy dll
         run: |
           basic() {
-              export CC=gcc
               cd ${GITHUB_WORKSPACE}/build
-              # find /cygdrive/c/tools/cygwin/ -type f -iname "*.dll" -exec cp {} . \;
-              find /cygdrive/c/tools/cygwin/ -type f -iname "*.dll" -print0 | xargs -0 -I {} cp {} .
-              ls -alht
+              find /cygdrive/c/tools/cygwin/ -type f -iname "*.dll" -exec cp {} . \;
+              # find /cygdrive/c/tools/cygwin/ -type f -iname "*.dll" -print0 | xargs -0 -I {} cp {} .
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-
-
-
-
 
       - name: zip
         run: |
           basic() {
-              export CC=gcc
               cd ${GITHUB_WORKSPACE}     
-              pwd
+              chmod a=rwx build -R
               zip -r build.zip ./build
               ls -lh build.zip
-              git status         
           }
           basic
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
-
-
-
-      # - name: Install Chocolatey
-      #   run: |
-      #     Set-ExecutionPolicy Bypass -Scope Process -Force; `
-      #     [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
-      #     iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-      # - name: Install Cygwin
-      #   run: |
-      #     choco install cygwin -y --params "/InstallDir:C:\cygwin"
-      #     Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-      #     refreshenv
-
-      # - name: Download Cygwin setup-x86_64.exe
-      #   run: |
-      #     Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile C:\cygwin\setup-x86_64.exe
-
-      # - name: Install Required Packages
-      #   run: |
-      #     C:\cygwin\setup-x86_64.exe -q -P gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libmariadbclient-devel,libpq-devel,libsqlite3-devel,dos2unix,libssl-dev,libssh-dev,libidn11-dev,libpcre3-dev,libgtk2.0-dev,libmysqlclient-dev,libpq-dev,libsvn-dev,firebird-dev,libmemcached-dev,libgpg-error-dev,libgcrypt11-dev,libgcrypt20-dev,openssl
-
-
-      # - name: debug
-      #   run: |
-      #     C:\cygwin\bin\bash.exe --help
-      #     C:\cygwin\bin\bash.exe -lc "find /cygdrive/c/cygwin -name setup-x86_64.exe && find /cygdrive/c/cygwin -name setup-*.exe && find /cygdrive/c/cygwin -name ssl.h "
-
-
-      # - name: Convert Line Endings
-      #   run: |
-      #     # pwd
-      #     # echo ${GITHUB_WORKSPACE}
-      #     # cd ${GITHUB_WORKSPACE}
-      #     # pwd
-      #     # dir
-      #     # C:\cygwin\bin\bash.exe --help
-      #     C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && ls -alth && dos2unix configure"
-
-      # - name: Compile THC-Hydra
-      #   run: |
-      #     # cd ${GITHUB_WORKSPACE} 
-      #     # pwd
-      #     C:\cygwin\bin\bash.exe -lc "cd /cygdrive/d/a/sanctioned/sanctioned && export CC=gcc && ./configure --debug --disable-xhydra --prefix=$PWD/build && make"
 
 
       - name: Upload artifact

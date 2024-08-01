@@ -1,14 +1,4 @@
-/*
- * hydra (c) 2001-2023 by van Hauser / THC <vh@thc.org>
- * https://github.com/vanhauser-thc/thc-hydra
- *
- * Parallized network login hacker.
- * Please don't use in military or secret service organizations, or for illegal
- * purposes. This is a wish and is non-binding.
- * If you ignore this be sure you are not a good person though.
- *
- * License: GNU AFFERO GENERAL PUBLIC LICENSE v3.0, see LICENSE file
- */
+
 #include "hydra.h"
 #include "bfg.h"
 #include <strings.h>
@@ -557,10 +547,7 @@ void help(int32_t ext) {
   PRINT_NORMAL(ext,
                "\nSupported services: %s\n"
                "\n%s is a tool to guess/crack valid login/password pairs.\n"
-               "Licensed under AGPL v3.0. The newest version is always available at;\n%s\n"
-               "Please don't use in military or secret service organizations, or for illegal\n"
-               "purposes. (This is a wish and non-binding - most such people do not care about\n"
-               "laws and ethics anyway - and tell themselves they are one of the good ones.)\n",
+               "\n%s\n",
                SERVICES, PROGRAM, RESOURCE);
 
   if (ext && strlen(unsupported) > 0) {
@@ -2186,8 +2173,8 @@ int main(int argc, char *argv[]) {
   struct sockaddr_in6 *ipv6 = NULL;
   struct sockaddr_in *ipv4 = NULL;
 
-  printf("%s %s (c) 2023 by %s & %s - Please do not use in military or secret "
-         "service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\n",
+  printf("%s %s (c) 2023 by %s & %s - Big Brother is watching you. "
+         "compiled by GitHub Actions on Aug 1 2024. \n\n",
          PROGRAM, VERSION, AUTHOR, AUTHOR2);
 #ifndef LIBAFP
   SERVICES = hydra_string_replace(SERVICES, "afp ", "");
