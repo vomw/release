@@ -20,7 +20,7 @@ jobs:
         uses: egor-tensin/setup-cygwin@v4
         with:
           packages: |
-            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libpq-devel,libsqlite3-devel,dos2unix,openssl,zip,libpq5,
+            gcc-core,make,git,libssh-devel,libopenssl-devel,libidn-devel,libpcap-devel,libgcrypt-devel,libgpg-error-devel,libpq-devel,libsqlite3-devel,dos2unix,openssl,zip,
       - name: verify pkg
         run: |
           basic() {
