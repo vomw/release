@@ -6,6 +6,8 @@ jobs:
     build:
 
         runs-on: ubuntu-20.04
+        env:
+            ANDROID_SDK_TOOLS:    "4333796"        
 
         steps:
             -   uses: actions/checkout@v2
