@@ -5,7 +5,8 @@ on: [push]
 jobs:
     build:
 
-        runs-on: ubuntu-20.04
+        # runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         env:
             ANDROID_SDK_TOOLS:    "4333796"        
             ANDROID_CMAKE:        "3.10.2.4988404"
