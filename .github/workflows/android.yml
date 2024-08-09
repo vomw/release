@@ -22,12 +22,10 @@ jobs:
               run: |
                     wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
                     sudo unzip -d $ANDROID_HOME android-sdk.zip 
-            - name: Install required Android tools
-              run: |
-                    echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager "cmake;${ANDROID_CMAKE}" 
-                    echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --licenses 
-
-
+            # - name: Install required Android tools
+            #   run: |
+            #         echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager "cmake;${ANDROID_CMAKE}" 
+            #         echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --licenses 
 
             -   name: Setting up the system environment
                 run: cp ./.github/workflows/github-action-only.jks ./app/keys.jks
