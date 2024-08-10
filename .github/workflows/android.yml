@@ -54,8 +54,8 @@ jobs:
 
             -   name: check gradle
                 run: |
-                    gradlew -h
-                    gradlew --version
+                    ./gradlew -h
+                    ./gradlew --version
                     
                     # ls -lht gradlew
                     
