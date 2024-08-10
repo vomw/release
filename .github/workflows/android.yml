@@ -48,7 +48,7 @@ jobs:
             -   name: check gradlew 
                 run: |
                     ls -lht gradlew
-                    ./gradlew --version
+                    # ./gradlew --version
                     # sudo git update-index --chmod=+x gradlew
                     # sudo chmod a=rwx gradlew
                     # sudo git config --global user.name 'vomw'
