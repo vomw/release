@@ -49,8 +49,15 @@ jobs:
                     which java
                     java -h
                     java -version
+
+
+            -   name: check gradle
+                run: |
+                    gradlew -h
+                    gradlew --version
+                    
                     # ls -lht gradlew
-                    # ./gradlew --version
+                    
                     # sudo git update-index --chmod=+x gradlew
                     # sudo chmod a=rwx gradlew
                     # sudo git config --global user.name 'vomw'
