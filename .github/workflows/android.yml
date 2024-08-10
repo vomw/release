@@ -7,9 +7,9 @@ jobs:
 
         # runs-on: ubuntu-20.04
         runs-on: ubuntu-latest
-        env:
-            ANDROID_SDK_TOOLS:    "4333796"        
-            ANDROID_CMAKE:        "3.10.2.4988404"
+        # env:
+        #     ANDROID_SDK_TOOLS:    "4333796"        
+        #     ANDROID_CMAKE:        "3.10.2.4988404"
         steps:
             -   uses: actions/checkout@v2
                 with:
@@ -19,17 +19,17 @@ jobs:
                 with:
                     java-version: 1.8
 
-            - name: uninstall jdk
-              run: sudo apt purge openjdk-*-jdk
+            # - name: uninstall jdk
+            #   run: sudo apt purge openjdk-*-jdk
 
 
-            - name: reinstall
-              run: sudo apt install openjdk-8-jdk
+            # - name: reinstall
+            #   run: sudo apt install openjdk-8-jdk
 
-            - name: Install Android sdkmanager
-              run: |
-                    wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
-                    sudo unzip -d $ANDROID_HOME android-sdk.zip 
+            # - name: Install Android sdkmanager
+            #   run: |
+            #         wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
+            #         sudo unzip -d $ANDROID_HOME android-sdk.zip 
             # - name: Install required Android tools
             #   run: |
             #         echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager "cmake;${ANDROID_CMAKE}" 
