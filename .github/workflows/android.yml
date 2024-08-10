@@ -48,14 +48,15 @@ jobs:
             -   name: change gradlew permission and push
                 run: |
                     ls -lht gradlew
-                    sudo git update-index --chmod=+x gradlew
-                    # sudo git config --global user.name 'vomw'
-                    # sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
-                    # sudo git status
-                    # sudo git diff
-                    # sudo git add gradlew
-                    # sudo git commit -m "upadte permission"
-                    # sudo git push
+                    # sudo git update-index --chmod=+x gradlew
+                    sudo chmod a=rwx gradlew
+                    sudo git config --global user.name 'vomw'
+                    sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
+                    sudo git status
+                    sudo git diff
+                    sudo git add gradlew
+                    sudo git commit -m "upadte permission"
+                    sudo git push
 
             -   name: Build with Gradle
                 run: |
