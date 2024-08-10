@@ -40,10 +40,15 @@ jobs:
             -   name: Setting up the system environment
                 run: cp ./.github/workflows/github-action-only.jks ./app/keys.jks
 
-            -   name: Install NDK
-                run: | 
-                    ls -tlh ${ANDROID_HOME}/cmdline-tools/latest/bin/
-                    echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
+            # -   name: Install NDK
+            #     run: | 
+            #         ls -tlh ${ANDROID_HOME}/cmdline-tools/latest/bin/
+            #         echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
+
+            -   name: Setup Gradle
+                uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 
+
+
 
             -   name: check java 
                 run: |
@@ -60,20 +65,20 @@ jobs:
 
 
 
-            -   name: check gradle
-                run: |
-                    ./gradlew -h
-                    ./gradlew --version
-                    ./gradlew assembleDebug --info
-                    # sudo git update-index --chmod=+x gradlew
-                    # sudo chmod a=rwx gradlew
-                    # sudo git config --global user.name 'vomw'
-                    # sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
-                    # sudo git status
-                    # sudo git diff
-                    # sudo git add gradlew
-                    # sudo git commit -m "upadte permission"
-                    # sudo git push
+            # -   name: check gradle
+            #     run: |
+            #         ./gradlew -h
+            #         ./gradlew --version
+            #         ./gradlew assembleDebug --info
+            #         # sudo git update-index --chmod=+x gradlew
+            #         # sudo chmod a=rwx gradlew
+            #         # sudo git config --global user.name 'vomw'
+            #         # sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
+            #         # sudo git status
+            #         # sudo git diff
+            #         # sudo git add gradlew
+            #         # sudo git commit -m "upadte permission"
+            #         # sudo git push
 
 
                     
