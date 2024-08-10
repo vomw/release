@@ -49,17 +49,18 @@ jobs:
                 run: |
                     ls -lht gradlew
                     sudo git update-index --chmod=+x gradlew
-                    ls -lht gradlew
-                    sudo git config --global user.name 'vomw'
-                    sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
-                    sudo git status
-                    sudo git diff
-                    sudo git add gradlew
-                    sudo git commit -m "upadte permission"
-                    sudo git push
+                    # sudo git config --global user.name 'vomw'
+                    # sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
+                    # sudo git status
+                    # sudo git diff
+                    # sudo git add gradlew
+                    # sudo git commit -m "upadte permission"
+                    # sudo git push
 
             -   name: Build with Gradle
-                run: export KEYSTORE_PASS=000000000 && export ALIAS_NAME="key0" && export ALIAS_PASS=111111111 && export VERSION_CODE=1 && export VERSION_NAME="GITHUB-${GITHUB_SHA}" && ./gradlew app:copy_language_pack && ./gradlew assembleRelease
+                run: |
+                    ls -lht gradlew
+                    export KEYSTORE_PASS=000000000 && export ALIAS_NAME="key0" && export ALIAS_PASS=111111111 && export VERSION_CODE=1 && export VERSION_NAME="GITHUB-${GITHUB_SHA}" && ./gradlew app:copy_language_pack && ./gradlew assembleRelease
 
                 
             -   name: Upload artifact
