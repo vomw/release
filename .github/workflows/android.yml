@@ -39,9 +39,9 @@ jobs:
                 run: cp ./.github/workflows/github-action-only.jks ./app/keys.jks
             -   name: Install NDK
                 run: | 
-                    echo ${ANDROID_HOME}
-                    ls -tlh ${ANDROID_HOME}
-                    echo "y" | sudo sh ${ANDROID_HOME}/sdkmanager --install "ndk;21.0.6113669"
+                    echo ${ANDROID_HOME}/cmdline-tools/latest/bin/
+                    ls -tlh ${ANDROID_HOME}/cmdline-tools/latest/bin/
+                    echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
             -   name: Build with Gradle
                 run: export KEYSTORE_PASS=000000000 && export ALIAS_NAME="key0" && export ALIAS_PASS=111111111 && export VERSION_CODE=1 && export VERSION_NAME="GITHUB-${GITHUB_SHA}" && ./gradlew app:copy_language_pack && ./gradlew assembleRelease
             -   name: Upload artifact
