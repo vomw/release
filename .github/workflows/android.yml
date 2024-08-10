@@ -51,14 +51,20 @@ jobs:
                     java -h
                     java -version
 
+            -   name: check environment 
+                run: |
+                    echo ${ANDROID_HOME}
+                    echo ${JAVA_HOME}
+                    echo ${GITHUB_SHA}
+
+
+
 
             -   name: check gradle
                 run: |
                     ./gradlew -h
                     ./gradlew --version
-                    
-                    # ls -lht gradlew
-                    
+                    ./gradlew assembleDebug --info
                     # sudo git update-index --chmod=+x gradlew
                     # sudo chmod a=rwx gradlew
                     # sudo git config --global user.name 'vomw'
@@ -70,11 +76,6 @@ jobs:
                     # sudo git push
 
 
-            -   name: check environment 
-                run: |
-                    echo ${ANDROID_HOME}
-                    echo ${JAVA_HOME}
-                    echo ${GITHUB_SHA}
                     
 
             -   name: Build with Gradle
