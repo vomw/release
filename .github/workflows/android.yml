@@ -47,7 +47,7 @@ jobs:
             -   name: check java 
                 run: |
                     which java
-                    java --help
+                    java -h
                     java --version
                     # ls -lht gradlew
                     # ./gradlew --version
@@ -66,6 +66,8 @@ jobs:
                 run: |
                     echo ${ANDROID_HOME}
                     echo ${JAVA_HOME}
+                    echo ${GITHUB_SHA}
+                    
 
             -   name: Build with Gradle
                 run: |
