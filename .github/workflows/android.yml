@@ -48,7 +48,7 @@ jobs:
                 run: |
                     which java
                     java -h
-                    java --version
+                    java -version
                     # ls -lht gradlew
                     # ./gradlew --version
                     # sudo git update-index --chmod=+x gradlew
