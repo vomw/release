@@ -5,8 +5,8 @@ on: [push]
 jobs:
     build:
 
-        runs-on: ubuntu-20.04
-        # runs-on: ubuntu-latest
+        # runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         # env:
         #     ANDROID_SDK_TOOLS:    "4333796"        
         #     ANDROID_CMAKE:        "3.10.2.4988404"
@@ -41,13 +41,15 @@ jobs:
 
             -   name: Install NDK
                 run: | 
-                    echo ${ANDROID_HOME}/cmdline-tools/latest/bin/
                     ls -tlh ${ANDROID_HOME}/cmdline-tools/latest/bin/
                     echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
 
-            -   name: check gradlew 
+            -   name: check java 
                 run: |
-                    ls -lht gradlew
+                    which java
+                    java --help
+                    java --version
+                    # ls -lht gradlew
                     # ./gradlew --version
                     # sudo git update-index --chmod=+x gradlew
                     # sudo chmod a=rwx gradlew
@@ -58,6 +60,12 @@ jobs:
                     # sudo git add gradlew
                     # sudo git commit -m "upadte permission"
                     # sudo git push
+
+
+            -   name: check environment 
+                run: |
+                    echo ${ANDROID_HOME}
+                    echo ${JAVA_HOME}
 
             -   name: Build with Gradle
                 run: |
