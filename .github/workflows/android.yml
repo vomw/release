@@ -14,6 +14,7 @@ jobs:
             -   uses: actions/checkout@v2
                 with:
                     submodules: 'true'
+
             -   name: set up JDK 1.8
                 uses: actions/setup-java@v1
                 with:
@@ -37,13 +38,30 @@ jobs:
 
             -   name: Setting up the system environment
                 run: cp ./.github/workflows/github-action-only.jks ./app/keys.jks
+
             -   name: Install NDK
                 run: | 
                     echo ${ANDROID_HOME}/cmdline-tools/latest/bin/
                     ls -tlh ${ANDROID_HOME}/cmdline-tools/latest/bin/
                     echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
+
+            -   name: change gradlew permission and push
+                run: |
+                    ls -lht gradlew
+                    sudo git update-index --chmod=+x gradlew
+                    ls -lht gradlew
+                    sudo git config --global user.name 'vomw'
+                    sudo git config --global user.email '22770640+vomw@users.noreply.github.com'
+                    sudo git status
+                    sudo git diff
+                    sudo git add gradlew
+                    sudo git commit -m "upadte permission"
+                    sudo git push
+
             -   name: Build with Gradle
-                run: sudo sh -c 'export KEYSTORE_PASS=000000000 && export ALIAS_NAME="key0" && export ALIAS_PASS=111111111 && export VERSION_CODE=1 && export VERSION_NAME="GITHUB-${GITHUB_SHA}" && ./gradlew app:copy_language_pack && ./gradlew assembleRelease'
+                run: export KEYSTORE_PASS=000000000 && export ALIAS_NAME="key0" && export ALIAS_PASS=111111111 && export VERSION_CODE=1 && export VERSION_NAME="GITHUB-${GITHUB_SHA}" && ./gradlew app:copy_language_pack && ./gradlew assembleRelease
+
+                
             -   name: Upload artifact
                 uses: actions/upload-artifact@master
                 with:
