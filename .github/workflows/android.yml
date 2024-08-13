@@ -47,16 +47,23 @@ jobs:
             #         echo "y" | sudo sh ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "ndk;21.0.6113669"
 
 
-            -   name: run Gradle test
-                run: ./gradlew test
+            -   name: check environment 
+                run: |
+                    echo ${ANDROID_HOME}
+                    echo ${JAVA_HOME}
+                    echo ${GITHUB_SHA}
+                    ls -lth ${JAVA_HOME}
 
 
-            -   name: Build gradle project
-                run: ./gradlew build                
+            # -   name: run Gradle test
+            #     run: ./gradlew test
 
-            -   name: Setup Gradle
-                uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 
 
+            # -   name: Build gradle project
+            #     run: ./gradlew build                
+
+            # -   name: Setup Gradle
+            #     uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 
 
 
             -   name: check java 
@@ -64,15 +71,6 @@ jobs:
                     which java
                     java -h
                     java -version
-
-            -   name: check environment 
-                run: |
-                    echo ${ANDROID_HOME}
-                    echo ${JAVA_HOME}
-                    echo ${GITHUB_SHA}
-
-
-
 
             # -   name: check gradle
             #     run: |
